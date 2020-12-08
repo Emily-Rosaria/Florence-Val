@@ -1,5 +1,6 @@
 const config = require('./../../config.json'); // load bot config
 const Users = require("./../../database/models/users.js"); // users model
+const Discord = require('discord.js'); // Image embed
 
 const getRolls = (min,max) => {
   let total = 0;
