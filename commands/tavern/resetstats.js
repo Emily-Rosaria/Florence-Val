@@ -13,8 +13,13 @@ module.exports = {
   async execute(message, args) {
     const userArg = args[0].match(/\d+/);
     if (!userArg) {
-      return message.reply("Invalid user argument. Please include either a user ID or a mention string.");
-    }
+      return message.reply("Invalid user argument. Please include either a user ID or a mention string.").then(msg => {
+        if (msg.channel.id == config.channels.statRolls) {
+          message.delete();
+          msg.delete({timeout: 30*1000});
+        }
+      });
+    };
     const userID = userArg[0];
     const userData = await Users.findByIdAndUpdate(userID,{
       "$unset": {
@@ -47,9 +52,19 @@ module.exports = {
       .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
       .setTimestamp()
       modlog.send(embed);
-      message.reply(`Done! Their stat rolls are deleted. Check <#${config.channels.modlog}> for more info.`);
+      message.reply(`Done! Their stat rolls are deleted. Check <#${config.channels.modlog}> for more info.`).then(msg => {
+        if (msg.channel.id == config.channels.statRolls) {
+          message.delete();
+          msg.delete({timeout: 30*1000});
+        }
+      });
     } else {
-      return message.reply("The mentioned user doesn't have any saved and unused rolls.");
+      message.reply("The mentioned user doesn't have any saved and unused rolls.").then(msg => {
+        if (msg.channel.id == config.channels.statRolls) {
+          message.delete();
+          msg.delete({timeout: 30*1000});
+        }
+      });
     }
   },
 };

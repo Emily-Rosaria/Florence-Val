@@ -26,9 +26,19 @@ module.exports = {
       .setColor('#0078d7')
       .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
       .setTimestamp(userData.lastStats.timestamp)
-      message.reply(embed); // Replies to the user with a random image
+      message.reply(embed).then(msg => {
+        if (msg.channel.id == config.channels.statRolls) {
+          message.delete();
+          msg.delete({timeout: 2*60*1000});
+        };
+      });
     } else {
-      message.reply(`No unused character stats found for ${user.tag}.`);
+      message.reply(`No unused character stats found for ${user.tag}.`).then(msg => {
+        if (msg.channel.id == config.channels.statRolls) {
+          message.delete();
+          msg.delete({timeout: 30*1000});
+        }
+      });
     }
   },
 };

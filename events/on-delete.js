@@ -10,13 +10,7 @@ module.exports = async function (message) {
     return; // return if no message data
   }
 
-  let quest = false;
-
-  if (config.channels.quests.includes(message.channel.id)) {
-    quest = true;
-  } else if (!config.channels.tavern.includes(message.channel.id)) {
-    return; // don't do anything for deletions in non-rp channels
-  }
+  let quest = oldMessageData.quest;
 
   const userData = await Users.findById(oldMessageData.author).exec();
   if (quest && userData && userData.quests && userData.quests.length > 0) {

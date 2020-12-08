@@ -36,7 +36,12 @@ module.exports = async function (message) {
   // check if the message is a valid command
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-  if(!command) return;
+  if (!command) {
+    if (config.channels.clean.includes(message.channel.id)) {
+      message.delete({timeout: timeout: 2*60*1000});
+    }
+    return;
+  }
 
   if (command.args && (!args.length || command.args > args.length)) {
     let reply = 'That command requires more details!';
@@ -100,7 +105,9 @@ module.exports = async function (message) {
     await command.execute(message, args);
   } catch(error) {
     console.error(error);
-    message.reply('Sorry! I ran into an error trying to do that!');
+    message.reply('Sorry! I ran into an error trying to do that!').then(m=>{
+      m.delete({timeout:60});
+    });
     const devUser = client.users.cache.get(config.perms.dev);
     const msg = (message.content.length > 200) ? message.content.slice(0,200) + ' [...]' : message.content;
     const errmsg = (error.stack.toString().length > 1500) ? error.stack.toString().slice(0,1500) + '...' : error.stack;

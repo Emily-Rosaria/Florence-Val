@@ -40,7 +40,7 @@ module.exports = {
   async execute(message, args) {
     if (message.channel.id != config.channels.statRolls) {
       const rolls = getRolls(config.statMin,config.statMax);
-      if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries... Which is a less than 1 in 1 billion chance. Wew.")}
+      if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries... Which is a less than 1 in 10e22 chance. Wew.")}
       const formattedRolls = rolls.map(r=>{
         const temp = r.sort((a,b)=>b-a);
         const out = {};
@@ -68,11 +68,12 @@ module.exports = {
     } else {
       const userData = await Users.findById(message.author.id).exec();
       if (userData && userData.lastStats && userData.lastStats.rolls) {
-        message.reply(`You already have stats saved by the bot, please use them before rolling again. Message a mod for assistance. You can view these with the \`$laststats\` command, or by going to this message: https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`);
+        message.reply(`You already have stats saved by the bot, please use them before rolling again. Message a mod for assistance. You can view these with the \`$laststats\` command, or by going to this message: https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`).then(msg => msg.delete({ timeout: 2*60*1000 }));
+        message.delete();
         return;
       } else {
         const rolls = getRolls(config.statMin,config.statMax);
-        if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries. Which is a less than 1 in 1 billion chance. Wew.")}
+        if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries. Which is a less than a 1 in 10e22 chance. Wew.")}
         const formattedRolls = rolls.map(r=>{
           const temp = r.sort((a,b)=>b-a);
           const out = {};
@@ -95,7 +96,7 @@ module.exports = {
         .setColor('#0078d7')
         .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
         .setTimestamp()
-        const msg = await message.reply(embed);
+        const msg = await message.reply({content: `<@${message.author.id}>`, embeds: [embed]});
 
         await Users.updateOne({_id : message.author.id},{
           "$set": {
@@ -111,8 +112,8 @@ module.exports = {
         embed.setTimestamp(new Date(msg.createdAt.getTime())).setDescription(`<@${message.author.id}>'s [New Stat Rolls](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${msg.id}):\n`+statText.join('\n')+`\nTotal = \`${total}\``);
 
         modlog.send(embed);
-        return;
       }
+      message.delete();
     }
   },
 };
