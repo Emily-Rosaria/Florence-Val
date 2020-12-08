@@ -24,7 +24,8 @@ module.exports = async function (message) {
     channel: message.channel.id,
     wordCount: words,
     charCount: chars,
-    timestamp: newMessage.createdAt.getTime()
+    timestamp: newMessage.createdAt.getTime(),
+    quest: true
   });
 
   // update quest word/char counts

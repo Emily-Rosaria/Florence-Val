@@ -34,7 +34,7 @@ module.exports = async function (oldMessage, newMessage) {
     return;
   }
 
-  if (userData.quests && userData.quests.length > 0) {
+  if (quest && userData.quests && userData.quests.length > 0) {
      const questData = userData.quests.find(q=>q._id == newMessage.channel.id);
      if (!questData || newMessage.createdAt.getTime() < questData.startTime) {
        return; // don't make changes for old message edits (or edits for posts not corresponding to a current quest)
@@ -63,7 +63,8 @@ module.exports = async function (oldMessage, newMessage) {
       channel: newMessage.channel.id,
       wordCount: words,
       charCount: chars,
-      timestamp: newMessage.createdAt.getTime()
+      timestamp: newMessage.createdAt.getTime(),
+      quest: quest
     }
   },{upsert: true, new: false}).exec(); // create message data if it doesn't exist (updates if it does), then return old message data (if it exists)
 
