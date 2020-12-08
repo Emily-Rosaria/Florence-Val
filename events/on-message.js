@@ -107,7 +107,7 @@ module.exports = async function (message) {
   } catch(error) {
     console.error(error);
     message.reply('Sorry! I ran into an error trying to do that!').then(m=>{
-      m.delete({timeout:60});
+      m.delete({timeout:60*1000});
     });
     const devUser = client.users.cache.get(config.perms.dev);
     const msg = (message.content.length > 200) ? message.content.slice(0,200) + ' [...]' : message.content;
