@@ -42,12 +42,12 @@ module.exports = {
       const embed = new Discord.MessageEmbed()
       .setAuthor(user.username, user.displayAvatarURL())
       .setTitle('Stat Roll Deletion')
-      .setURL(`https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`)
-      .setDescription(`<@${message.author.id}> has deleted the stored stat roll of <@${user.id}>:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
+      .setDescription(`<@${message.author.id}> has deleted the [stored stat roll](https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}) of <@${user.id}>:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
       .setColor('#0078d7')
       .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
       .setTimestamp()
       modlog.send(embed);
+      message.reply(`Done! Their stat rolls are deleted. Check <#${config.channels.modlog}> for more info.`);
     } else {
       return message.reply("The mentioned user doesn't have any saved and unused rolls.");
     }
