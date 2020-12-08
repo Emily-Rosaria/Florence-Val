@@ -1,5 +1,5 @@
 {
-  "prefix": ["$","f!","v!"],
+  "prefix": ["$","w!","f!","v!"],
   "statMin":75,
   "statMax":85,
   "dbName": "dnd",
@@ -11,7 +11,8 @@
     "tavern": [],
     "quests": [],
     "modlog": "785697724786802698",
-    "clean": ["785665043252772864"]
+    "clean": ["785665043252772864"],
+    "submission": "785667391014830090"
   },
   "perms": {
     "dev": "247344219809775617",
@@ -20,6 +21,13 @@
     "mod": "785293692809773127",
     "writer": "785256433683136542"
   },
+  "ranks": [
+    {"name":"bronze","id":"785895406265565215","slots":2,"level":1},
+    {"name":"silver","id":"785895394148220958","slots":2,"level":5},
+    {"name":"electrum","id":"785895370520657921","slots":3,"level":9},
+    {"name":"gold","id":"785895369259220992","slots":3,"level":13},
+    {"name":"platinum","id":"785895367773257777","slots":4,"level":17}
+  ],
   "gifs":{
     "blast":"https://media1.tenor.com/images/8c1f5a467a7bc94cc93f74ac20f366bc/tenor.gif"
   }

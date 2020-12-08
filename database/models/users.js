@@ -18,9 +18,11 @@ var CharacterSchema = new Schema({
   name: {type: String, required: true}, // the character's name
   baseStats: [StatSchema],
   exp: {type: Number, default: config.cumulativeExp[config.startingLevel]}, // total exp the character has
-  downtime: {type: Number, default: 0}, // number of downtime weeks stored
+  downtime: {type: Number, default: 0}, // number of downtime units stored
   totalWords: {type: Number, default: 0}, // total words written for this character
-  totalChars: {type: Number, default: 0} // character count - as in total letters written for this character
+  totalChars: {type: Number, default: 0}, // character count - as in total letters written for this character
+  approved: {type: Boolean, default: false}, // whether or not the character is approved yet
+  createdAt: {type: Number, default: (new Date()).getTime()}
 });
 
 CharacterSchema.virtual('totalStats').get(function() {
@@ -60,7 +62,7 @@ var UserSchema = new Schema({ // Create Schema
     type: Map,  // documents "names" - like the name of a copypasta.
     of: String // document "keys (for use with a document model)"
   },
-  characters: {type: [CharacterSchema], default: {}},
+  characters: {type: [CharacterSchema], default: [{}]},
   lastStats: StoredStatsSchema, // last stats officially rolled and such
   totalWords: {type: Number, default: 0}, // total words written by this users
   totalChars: {type: Number, default: 0} // character count - as in total letters written by this user
