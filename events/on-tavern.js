@@ -29,7 +29,7 @@ module.exports = async function (message) {
   });
 
   // update user word/char counts
-  const oldUserData = await Users.findOneAndUpdate({_id: message.author.id, quests._id: message.channel.id},
+  const oldUserData = await Users.findOneAndUpdate({_id: message.author.id, "quests._id": message.channel.id},
   {
     "$inc":
       {"totalChars": chars},

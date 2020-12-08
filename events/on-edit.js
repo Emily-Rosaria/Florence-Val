@@ -73,7 +73,7 @@ module.exports = async function (oldMessage, newMessage) {
 
   if (wordChange != 0 || charChange != 0) {
     if (quest) {
-      await Users.updateOne({_id: message.author.id, quests._id: message.channel.id},
+      await Users.updateOne({_id: message.author.id, "quests._id": message.channel.id},
       {
         "$inc":
           {"quests.$.charCount": charChange},
