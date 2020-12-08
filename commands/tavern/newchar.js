@@ -42,6 +42,14 @@ module.exports = {
           }
         });
       }
+      if (userData.characters.find(c=>c.name==charName)) {
+        return message.reply(`You already have a character named ${charName} saved. If you wish to drop them and start over (or otherwise replace them), contact a mod. Otherwise, you should try a different name.`).then(msg=>{
+          if (msg.channel.id == config.channels.statRolls) {
+            message.delete({timeout: 60*1000});
+            msg.delete({timeout: 60*1000});
+          }
+        });
+      }
     }
 
     if (charName.length > 40) {
