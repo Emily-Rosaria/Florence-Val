@@ -21,9 +21,8 @@ module.exports = {
       });
       const embed = new Discord.MessageEmbed()
       .setAuthor(user.username,user.displayAvatarURL())
-      .setTitle(`${user.username}'s last stat roll.'`)
-      .setURL(`https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`)
-      .setDescription(`<@${user.id}>'s rolls:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
+      .setTitle(`${user.username}'s Pending Stats`)
+      .setDescription(`<@${user.id}>'s [Last Stat Roll](https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}) at <#${config.channels.statRolls}>:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
       .setColor('#0078d7')
       .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
       .setTimestamp(userData.lastStats.timestamp)
