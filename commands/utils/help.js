@@ -14,22 +14,18 @@ module.exports = {
     async execute(message, args) {
         const prefix = config.prefix[0];
         const { commands } = message.client;
-        data = [];
+        let data = [];
         // Send help data about ALL commands
         if(!args.length) {
-            data.push('Here\'s a list of all my commands:');
-            data.push(commands.filter(command=>!command.perms || command.perms != "dev").map(command => command.name).join(', '));
-            data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+          data.push('Here\'s a list of all my commands:');
+          data.push(commands.filter(command=>!command.perms || command.perms != "dev").map(command => command.name).join(', '));
+          data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
-            return message.author.send(data, { split: true })
-                .then(() => {
-                    if (message.channel.type === 'dm') return;
-                    message.reply('I\'ve sent you a DM with all my commands!');
-                })
-                .catch(error => {
-                    console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-                    message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-                });
+          return message.channel.send(data, { split: true })
+          .catch(error => {
+            console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+            message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+          });
         }
 
         // Send help data about the specific command
@@ -37,7 +33,7 @@ module.exports = {
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
         if (!command) {
-            return message.reply(`\`${args[0]}\` is not a valid command!`);
+          return message.reply(`\`${args[0]}\` is not a valid command!`);
         }
 
         data.push(`**Name:** ${command.name}`);
