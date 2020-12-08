@@ -32,7 +32,7 @@ module.exports = {
     });
 
     const embed = new Discord.MessageEmbed()
-    .setAuthor(user.username, user.author.displayAvatarURL())
+    .setAuthor(user.username, user.displayAvatarURL())
     .setTitle(`Characters of ${user.username}!`)
     .setDescription(`<@${user.id}>'s list of characters.`)
     .setColor('#0078d7')
