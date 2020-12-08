@@ -49,11 +49,11 @@ module.exports = {
     const deleted = newData.characters.find(c=>c.name==name||c._id==nameID);
     if (deleted) {
       let total = 0;
-      const stats = rolls.map((r,i)=>{
+      const stats = rolls.length > 0 ? rolls.map((r,i)=>{
         const rTotal = r.roll1 + r.roll2 + r.roll3;
         total = total + rTotal;
         return `Stat ${i+1}: \`${rTotal}\` (${r.roll1}, ${r.roll2}, ${r.roll3}, ~~${r.roll4}~~)`;
-      }).join('\n');
+      }).join('\n') : '';
       const modlog = message.guild.channels.cache.get(config.channels.modlog);
       const modEmbed = new Discord.MessageEmbed()
       .setAuthor(user.username, user.displayAvatarURL())
