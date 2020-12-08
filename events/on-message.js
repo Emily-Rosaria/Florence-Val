@@ -101,7 +101,7 @@ module.exports = async function (message) {
   } catch(error) {
     console.error(error);
     message.reply('Sorry! I ran into an error trying to do that!');
-    const devUser = client.users.cache.get(dev);
+    const devUser = client.users.cache.get(config.perms.dev);
     const msg = (message.content.length > 200) ? message.content.slice(0,200) + ' [...]' : message.content;
     const errmsg = (error.stack.toString().length > 1500) ? error.stack.toString().slice(0,1500) + '...' : error.stack;
     const errLocation = message.channel.type == "dm" ? 'in `Direct Messages`' : 'from `'+message.channel.name+'`';
