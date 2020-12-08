@@ -62,7 +62,7 @@ var UserSchema = new Schema({ // Create Schema
     type: Map,  // documents "names" - like the name of a copypasta.
     of: String // document "keys (for use with a document model)"
   },
-  characters: {type: [CharacterSchema], default: [{}]},
+  characters: {type: [CharacterSchema], default: []},
   cachedSlots: {type: Number, default: 1},
   lastStats: StoredStatsSchema, // last stats officially rolled and such
   totalWords: {type: Number, default: 0}, // total words written by this users
