@@ -1,6 +1,7 @@
 const config = require('./../config.json'); // load bot config
 const onQuest = require('./on-quest.js'); // For roleplay quest message parsing
 const onTavern = require('./on-tavern.js'); // For roleplay tavern message parsing
+const Discord = require('discord.js'); // Loads the discord API library
 
 module.exports = async function (message) {
 
