@@ -1,0 +1,29 @@
+{
+  "name": "dnd-bot",
+  "version": "1.0.0",
+  "description": "Fun bot for dnd",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "mongo": "node ./database/mongo-init.js"
+  },
+  "author": "Emily Rose",
+  "license": "MIT",
+  "dependencies": {
+    "booru": "^2.4.0",
+    "canvas": "^2.6.1",
+    "discord.js": "^12.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "googleapis": "^65.0.0",
+    "got": "^7.1.0",
+    "https": "^1.0.0",
+    "mongoose": "^5.10.16",
+    "nano": "^9.0.1",
+    "node": "^12.19.1",
+    "node-fetch": "^2.6.1",
+    "pm2": "^4.5.0",
+    "reddit": "^1.2.1",
+    "request": "^2.88.2"
+  }
+}

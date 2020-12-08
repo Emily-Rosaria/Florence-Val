@@ -1,0 +1,101 @@
+const config = require('./../config.json'); // load bot config
+const Users = require("./../database/models/users.js"); // users model
+
+const getRolls = (min,max) => {
+  let total = 0;
+  let totals = [];
+  let stats = [];
+  const reps = 10;
+  let i = 0;
+  while ((total < min || total > max) && i < reps) {
+    stats = [...new Array(6)].map(s=>[...new Array(4)].map(r=>Math.ceil(6 - 6*Math.random())));
+    totals = stats.map(s=>s.sort((a,b)=>a-b).slice(1).reduce((a,b)=>a+b,0));
+    total = totals.reduce((acc,cur)=>acc+cur,0);
+  }
+  if (total < min || total > max) {
+    return false;
+  } else {
+    return stats;
+  }
+}
+
+module.exports = {
+  name: 'randchar', // The name of the command
+  aliases: ['statgen','rollstats'],
+  description: `Randomly generates character stats within the range of [${config.statMin},${config.statMax}].`, // The description of the command (for help text)
+  args: false, // Specified that this command doesn't need any data other than the command
+  perms: false,
+  allowDM: true,
+  usage: '', // Help text to explain how to use the command (if it had any arguments)
+  execute(message, args) {
+    if (message.channel.id != config.channels.statRolls) {
+      const rolls = getRolls(config.statMin,config.statMax);
+      const formattedRolls = rolls.map(r=>{
+        const temp = r.sort((a,b)=>b-a);
+        const out = {};
+        out.roll1 = temp[0];
+        out.roll2 = temp[1];
+        out.roll3 = temp[2];
+        out.roll4 = temp[3];
+        return out;
+      });
+      let total = 0;
+      const statText = formattedRolls.map((r,i)=>{
+        const rTotal = r.roll1 + r.roll2 + r.roll3;
+        total = rTotal;
+        return `Stat ${i+1}: \`${rTotal}\` (${r.roll1}, ${r.roll2}, ${r.roll3}, ~~${r.roll4}~~)`;
+      });
+      const embed = new Discord.MessageEmbed()
+      .setAuthor(message.author.username, message.author.displayAvatarURL())
+      .setTitle('Unofficial Stat Rolls')
+      .setDescription(`<@${message.author.id}>'s Stat Rolls:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
+      .setColor('#0078d7')
+      .setFooter(`${message.author.tag} - ${message.author.id}`)
+      .setTimestamp()
+      message.reply(embed);
+      return;
+    } else {
+      const userData = await Users.findById(message.author.id).exec();
+      if (userData && userData.lastStats && userData.lastStats.rolls) {
+        message.reply(`You already have stats saved by the bot, please use them before rolling again. Message a mod for assistance. You can view these with the \`$laststats\` command, or by going to this message: https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`);
+        return;
+      } else {
+        const rolls = getRolls(config.statMin,config.statMax);
+        const formattedRolls = rolls.map(r=>{
+          const temp = r.sort((a,b)=>b-a);
+          const out = {};
+          out.roll1 = temp[0];
+          out.roll2 = temp[1];
+          out.roll3 = temp[2];
+          out.roll4 = temp[3];
+          return out;
+        });
+        let total = 0;
+        const statText = formattedRolls.map((r,i)=>{
+          const rTotal = r.roll1 + r.roll2 + r.roll3;
+          total = rTotal;
+          return `Stat ${i+1}: \`${rTotal}\` (${r.roll1}, ${r.roll2}, ${r.roll3}, ~~${r.roll4}~~)`;
+        });
+        const embed = new Discord.MessageEmbed()
+        .setAuthor(message.author.username, message.author.displayAvatarURL())
+        .setTitle('Official Stat Rolls')
+        .setDescription(`<@${message.author.id}>'s New Stat Rolls:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
+        .setColor('#0078d7')
+        .setFooter(`${message.author.tag} - ${message.author.id}`)
+        .setTimestamp()
+        const msg = await message.reply(embed);
+
+        await Users.findByIdAndUpdate(message.author.id,{
+          "$set":
+            lastStats: {
+              rolls: formattedRolls,
+              timestamp: msg.createdAt().getTime(),
+              messageID: msg.id
+            }
+          }
+        },{upsert:true,new:true}).exec();
+        return;
+      }
+    }
+  },
+};
