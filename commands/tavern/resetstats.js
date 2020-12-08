@@ -4,7 +4,7 @@ const Discord = require('discord.js'); // Image embed
 
 module.exports = {
   name: 'resetstats', // The name of the command
-  aliases: ['statreset'],
+  aliases: ['statreset','clearstats','deleteroll'],
   description: "Resets the stats rolled by a user", // The description of the command (for help text)
   args: true,
   perms: "mod",
