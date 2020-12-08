@@ -95,7 +95,11 @@ module.exports = {
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
     .setTimestamp(now.getTime())
     modlog.send({embed: embed});
-    message.channel.send({content: `<@${message.author.id}>`,embed: embed});
-    message.delete();
+    if (message.channel.id == config.channels.statRolls) {
+      message.delete();
+      message.channel.send({content: `<@${message.author.id}>`,embed: embed});
+    } else {
+      message.channel.send({embed: embed});
+    }
   },
 };
