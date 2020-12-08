@@ -22,7 +22,7 @@ module.exports = {
       }
     },{new: false});
     if (userData && userData.lastStats && userData.lastStats.rolls) {
-      const modlog = message.guild.channels.cache.get(config.channel.modlog);
+      const modlog = message.guild.channels.cache.get(config.channels.modlog);
       let user = message.client.users.cache.get(userID);
       if (!user) {
         user = {
