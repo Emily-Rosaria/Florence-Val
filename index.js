@@ -48,7 +48,7 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
-const cooldowns = new Discord.Collection(); // Creates an empty list for storing timeouts so people can't spam with commands
+client.cooldowns = new Discord.Collection(); // Creates an empty list for storing timeouts so people can't spam with commands
 
 // Starts the bot and makes it begin listening for commands.
 client.on('ready', async function() {
