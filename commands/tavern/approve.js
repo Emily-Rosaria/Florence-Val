@@ -32,7 +32,8 @@ module.exports = {
 
     Users.updateOne({_id: member.user.id, "characters._id": pending._id},{
       "$set": {
-        approved: true
+        "characters.$.approved": true,
+        "characters.$.exp": config.cumulativeExp[config.startingLevel-1]
       }
     });
 

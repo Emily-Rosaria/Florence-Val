@@ -60,8 +60,8 @@ module.exports = {
       const modlog = message.guild.channels.cache.get(config.channels.modlog);
       const modEmbed = new Discord.MessageEmbed()
       .setAuthor(user.username, user.displayAvatarURL())
-      .setTitle(`Character Deleted: ${deleted.name}!`)
-      .setDescription(`<@${user.id}>'s character named "${deleted.name}" was deleted by <@${message.author.id}>. They had the following stat array:\n${stats}\nTotal = \`${total}\``)
+      .setTitle(`Character Deleted: ${deleted.name || "Invalid Name"}!`)
+      .setDescription(`<@${user.id}>'s character named "${deleted.name || "Invalid Name"}" was deleted by <@${message.author.id}>. They had the following stat array:\n${stats}\nTotal = \`${total}\``)
       .setColor('#0078d7')
       .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
       .setTimestamp()

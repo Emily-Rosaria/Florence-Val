@@ -58,7 +58,7 @@ module.exports = {
     const newChar = {
       name: charName, // the character's name
       baseStats: rolls,
-      exp: config.cumulativeExp[config.startingLevel], // total exp the character has
+      exp: config.cumulativeExp[config.startingLevel-1], // total exp the character has
       downtime: 0, // number of downtime units stored
       totalWords: 0, // total words written for this character
       totalChars: 0, // character count - as in total letters written for this character

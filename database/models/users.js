@@ -17,7 +17,7 @@ StatSchema.virtual('total').get(function() {
 var CharacterSchema = new Schema({
   name: {type: String, required: true}, // the character's name
   baseStats: [StatSchema],
-  exp: {type: Number, default: config.cumulativeExp[config.startingLevel]}, // total exp the character has
+  exp: {type: Number, default: config.cumulativeExp[config.startingLevel-1]}, // total exp the character has
   downtime: {type: Number, default: 0}, // number of downtime units stored
   totalWords: {type: Number, default: 0}, // total words written for this character
   totalChars: {type: Number, default: 0}, // character count - as in total letters written for this character
@@ -30,9 +30,9 @@ CharacterSchema.virtual('totalStats').get(function() {
 });
 
 CharacterSchema.virtual('level').get(function() {
-  for (const levelexp of config.cumulativeExp) {
-    if (this.exp < levelexp) {
-      return l;
+  for (const index in config.cumulativeExp) {
+    if (this.exp < config.cumulativeExp[index]) {
+      return index;
     }
   }
   return 20;
