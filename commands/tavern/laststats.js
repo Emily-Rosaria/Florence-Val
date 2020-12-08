@@ -3,8 +3,8 @@ const Users = require("./../../database/models/users.js"); // users model
 const Discord = require('discord.js'); // Image embed
 
 module.exports = {
-  name: 'randchar', // The name of the command
-  aliases: ['statgen','rollstats'],
+  name: 'laststats', // The name of the command
+  aliases: ['storedstats','lastchar'],
   description: 'Test if the bot is listening and able to reply.', // The description of the command (for help text)
   args: false, // Specified that this command doesn't need any data other than the command
   perms: false,
