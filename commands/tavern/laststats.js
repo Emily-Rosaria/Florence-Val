@@ -25,7 +25,7 @@ module.exports = {
       .setURL(`https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`)
       .setDescription(`<@${user.id}>'s rolls:\n`+statText.join('\n')+`\nTotal = \`${total}\``)
       .setColor('#0078d7')
-      .setFooter(`Requested by ${message.author.tag}`)
+      .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
       .setTimestamp(userData.lastStats.timestamp)
       message.reply(embed); // Replies to the user with a random image
     } else {
