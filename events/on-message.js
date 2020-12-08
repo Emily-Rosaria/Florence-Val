@@ -36,7 +36,7 @@ module.exports = async function (message) {
   // check if the message is a valid command
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-  const roleCache = message.channel.type == "dm" ? [] : message.member.roles.cache; // get role cache
+  const roleCache = message.channel.type != "dm" && message.member && message.member.roles ? message.member.roles.cache || [] : []; // get role cache
 
   if (!command) {
     if (config.channels.clean.includes(message.channel.id) && !roleCache.includes(config.perms.admin)
@@ -84,9 +84,15 @@ module.exports = async function (message) {
   if(command.perms) {
     if (message.channel.type == "dm") {
       if (!command.allowDM) {
-        return message.reply("This command is not available for use in DMs.")
+        return message.reply("This command is not available for use in DMs.");
+      } else if (command.allowDM && (command.perms == "dev" && !config.perms.dev)) {
+        return message.reply("This command is only available for devs.");
       }
     } else if (message.author.id != config.perms.dev) {
+
+      if (command.perms == "dev") {
+        return message.reply("This command is only available for bot devs.");
+      }
       // check perms for admin commands
       if (!roleCache.has(config.perms.admin) || !message.member.hasPermission("ADMINISTRATOR")) {
         if (command.perms == "admin") {
