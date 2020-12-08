@@ -96,7 +96,7 @@ module.exports = {
               messageID: msg.id
             }
           }
-        },{upsert:true,new:true}).exec();
+        },{upsert:true}).exec();
         return;
       }
     }
