@@ -31,6 +31,7 @@ module.exports = {
   async execute(message, args) {
     if (message.channel.id != config.channels.statRolls) {
       const rolls = getRolls(config.statMin,config.statMax);
+      if (!rolls) {return message.reply("Failed to generate valid rolls after 10 tries.")}
       const formattedRolls = rolls.map(r=>{
         const temp = r.sort((a,b)=>b-a);
         const out = {};
@@ -62,6 +63,7 @@ module.exports = {
         return;
       } else {
         const rolls = getRolls(config.statMin,config.statMax);
+        if (!rolls) {return message.reply("Failed to generate valid rolls after 10 tries.")}
         const formattedRolls = rolls.map(r=>{
           const temp = r.sort((a,b)=>b-a);
           const out = {};
