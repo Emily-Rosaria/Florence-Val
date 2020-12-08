@@ -69,8 +69,6 @@ module.exports = {
       const userData = await Users.findById(message.author.id).exec();
       if (userData && userData.lastStats && userData.lastStats.rolls) {
         message.reply(`You already have stats saved by the bot, please use them before rolling again. Message a mod for assistance. You can view these with the \`$laststats\` command, or by going to this message: https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}`).then(msg => msg.delete({ timeout: 2*60*1000 }));
-        message.delete();
-        return;
       } else {
         const rolls = getRolls(config.statMin,config.statMax);
         if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries. Which is a less than a 1 in 10e22 chance. Wew.")}
@@ -96,7 +94,7 @@ module.exports = {
         .setColor('#0078d7')
         .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
         .setTimestamp()
-        const msg = await message.reply({content: `<@${message.author.id}>`, embed: embed});
+        const msg = await message.channel.send({content: `<@${message.author.id}>`, embed: embed});
 
         await Users.updateOne({_id : message.author.id},{
           "$set": {
