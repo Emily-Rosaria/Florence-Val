@@ -23,7 +23,7 @@ module.exports = {
       });
     }
 
-    if (userData.characters) {
+    if (userData.characters && Array.isArray(userData.characters) && userData.characters.length > 0) {
       const pending = userData.characters.find(c=>!c.approved);
       if (pending) {
         return message.reply("You already have a character with assigned stats pending approval. Please either rename that with the `$rename <old-name> <new-name>` command or make sure your character app for `"+pending.name+"` is submitted at <#"+config.channels.submission+">.").then(msg=>{
