@@ -5,7 +5,7 @@ const Discord = require('discord.js'); // Image embed
 module.exports = {
   name: 'rename', // The name of the command
   aliases: ['renamechar','setname','newname'],
-  description: 'Creates character data with your stored stat data.', // The description of the command (for help text)
+  description: 'Renames a stored character.', // The description of the command (for help text)
   args: 2, // Specified that this command doesn't need any data other than the command
   perms: false,
   cooldown: 5,

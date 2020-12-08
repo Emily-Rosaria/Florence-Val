@@ -5,7 +5,7 @@ const Discord = require('discord.js'); // Image embed
 module.exports = {
   name: 'laststats', // The name of the command
   aliases: ['storedstats','lastchar'],
-  description: 'Test if the bot is listening and able to reply.', // The description of the command (for help text)
+  description: 'Show last un-applied official stat roll of user.', // The description of the command (for help text)
   args: false, // Specified that this command doesn't need any data other than the command
   perms: false,
   allowDM: true,
