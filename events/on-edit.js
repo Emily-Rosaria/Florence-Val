@@ -75,18 +75,20 @@ module.exports = async function (oldMessage, newMessage) {
     if (quest) {
       await Users.updateOne({_id: message.author.id, "quests._id": message.channel.id},
       {
-        "$inc":
-          {"quests.$.charCount": charChange},
-          {"quests.$.wordCount": wordChange},
-          {"totalChars": charChange},
-          {"totalWords": wordChange}
+        "$inc": {
+          "quests.$.charCount": charChange,
+          "quests.$.wordCount": wordChange,
+          "totalChars": charChange,
+          "totalWords": wordChange
+        }
       },{upsert : true}).exec();
     } else {
       await Users.updateOne({_id: message.author.id},
       {
-        "$inc":
-          {"totalChars": charChange},
-          {"totalWords": wordChange}
+        "$inc": {
+          "totalChars": charChange,
+          "totalWords": wordChange
+        }
       },{upsert : true}).exec();
     }
   }

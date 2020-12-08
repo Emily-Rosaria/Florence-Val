@@ -31,11 +31,12 @@ module.exports = async function (message) {
   // update quest word/char counts
   const oldUserData = await Users.findOneAndUpdate({_id: message.author.id, "quests._id": message.channel.id},
   {
-    "$inc":
-      {"quests.$.charCount": chars},
-      {"quests.$.wordCount": words},
-      {"totalChars": chars},
-      {"totalWords": words}
+    "$inc": {
+      "quests.$.charCount": chars,
+      "quests.$.wordCount": words,
+      "totalChars": chars,
+      "totalWords": words
+    }
   },{upsert : true}).exec();
 
   // if quest didn't exist prior set the quest start time
