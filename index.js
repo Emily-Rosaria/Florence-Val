@@ -62,12 +62,12 @@ client.on('message', async message => {
 });
 
 client.on('messageDelete', async message => {
-    if (message.author.bot) {return} // don't respond to bots
+    if (message.author && message.author.bot) {return} // don't respond to bots
     onDelete(message);
 });
 
 client.on('messageUpdate', async (oldMessage, newMessage) => {
-    if (oldMessage.author.bot) {return} // don't respond to bots
+    if (newMessage.author.bot) {return} // don't respond to bots
     onEdit(oldMessage, newMessage);
 });
 
