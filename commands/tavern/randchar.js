@@ -8,9 +8,17 @@ const getRolls = (min,max) => {
   let stats = [];
   const reps = 50;
   let i = 0;
-  while ((total < min || total > max) && i < reps) {
+  let best = 0;
+  while ((best < 16 || total < min || total > max) && i < reps) {
     stats = [...new Array(6)].map(s=>[...new Array(4)].map(r=>Math.ceil(6 - 6*Math.random())));
     totals = stats.map(s=>s.sort((a,b)=>a-b).slice(1).reduce((a,b)=>a+b,0));
+    best = totals.reduce((acc,cur)=>{
+      if (acc > cur) {
+        return acc;
+      } else {
+        return cur;
+      }
+    });
     total = totals.reduce((acc,cur)=>acc+cur,0);
     i = i+1;
   }
