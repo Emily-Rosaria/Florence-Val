@@ -106,7 +106,7 @@ module.exports = {
             }
           }
         },{upsert:true}).exec();
-        const modlog = guild.channels.cache.get(config.channel.modlog);
+        const modlog = message.guild.channels.cache.get(config.channel.modlog);
 
         embed.setTimestamp(new Date(msg.createdAt.getTime())).setURL(`https://discord.com/channels/${message.guild.id}/${message.channel.id}/${msg.id}`);
 
