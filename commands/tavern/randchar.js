@@ -96,7 +96,7 @@ module.exports = {
         .setColor('#0078d7')
         .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
         .setTimestamp()
-        const msg = await message.reply({content: `<@${message.author.id}>`, embeds: [embed]});
+        const msg = await message.reply({content: `<@${message.author.id}>`, embed: embed});
 
         await Users.updateOne({_id : message.author.id},{
           "$set": {
