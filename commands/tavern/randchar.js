@@ -6,12 +6,13 @@ const getRolls = (min,max) => {
   let total = 0;
   let totals = [];
   let stats = [];
-  const reps = 10;
+  const reps = 50;
   let i = 0;
   while ((total < min || total > max) && i < reps) {
     stats = [...new Array(6)].map(s=>[...new Array(4)].map(r=>Math.ceil(6 - 6*Math.random())));
     totals = stats.map(s=>s.sort((a,b)=>a-b).slice(1).reduce((a,b)=>a+b,0));
     total = totals.reduce((acc,cur)=>acc+cur,0);
+    i = i+1;
   }
   if (total < min || total > max) {
     return false;
@@ -31,7 +32,7 @@ module.exports = {
   async execute(message, args) {
     if (message.channel.id != config.channels.statRolls) {
       const rolls = getRolls(config.statMin,config.statMax);
-      if (!rolls) {return message.reply("Failed to generate valid rolls after 10 tries.")}
+      if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries... Which is a less than 1 in 1 billion chance. Wew.")}
       const formattedRolls = rolls.map(r=>{
         const temp = r.sort((a,b)=>b-a);
         const out = {};
@@ -63,7 +64,7 @@ module.exports = {
         return;
       } else {
         const rolls = getRolls(config.statMin,config.statMax);
-        if (!rolls) {return message.reply("Failed to generate valid rolls after 10 tries.")}
+        if (!rolls) {return message.reply("Failed to generate valid rolls after 50 tries. Which is a less than 1 in 1 billion chance. Wew.")}
         const formattedRolls = rolls.map(r=>{
           const temp = r.sort((a,b)=>b-a);
           const out = {};
