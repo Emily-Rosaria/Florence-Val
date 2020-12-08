@@ -28,7 +28,7 @@ module.exports = {
 
     const array = userData.characters.map(c=>{
       const temp = c.approved ? "This character is approved." : "This character is not approved.";
-      return [c.name,temp];
+      return [c.name,temp+`\nThis character's id is \`${c._id}\`.`];
     });
 
     const embed = new Discord.MessageEmbed()
@@ -39,7 +39,7 @@ module.exports = {
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
     .setTimestamp(now.getTime())
     for (const arr of array) {
-      embed.addField(arr[0],arr[1]);
+      embed.addField(arr[0] || '\u200b',arr[1],true);
     }
     message.channel.send({embed: embed});
   },
