@@ -37,7 +37,7 @@ module.exports = {
     .setDescription(`<@${user.id}>'s list of characters.`)
     .setColor('#0078d7')
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
-    .setTimestamp(now.getTime())
+    .setTimestamp()
     for (const arr of array) {
       embed.addField(arr[0] || '\u200b',arr[1],true);
     }
