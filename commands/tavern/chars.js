@@ -22,7 +22,7 @@ module.exports = {
     }
 
     const userData = await Users.findById(user.id).exec();
-    if (!userData || !userData.characters || !Array.isArray(userData) || userData.characters.length == 0) {
+    if (!userData || !userData.characters || !Array.isArray(userData.characters) || userData.characters.length == 0) {
       return message.reply("The user `"+user.tag+"` has no characters registered. Have they rolled their stats and used the `$newchar <character-name>` command?");
     }
 
