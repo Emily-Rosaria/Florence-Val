@@ -88,7 +88,7 @@ module.exports = {
         .setTimestamp()
         const msg = await message.reply(embed);
 
-        await Users.findByIdAndUpdate(message.author.id,{
+        await Users.updateOne({_id : message.author.id},{
           "$set": {
             lastStats: {
               rolls: formattedRolls,
