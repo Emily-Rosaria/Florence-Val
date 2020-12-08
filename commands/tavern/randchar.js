@@ -106,9 +106,9 @@ module.exports = {
             }
           }
         },{upsert:true, setDefaultsOnInsert: true}).exec();
-        const modlog = message.guild.channels.cache.get(config.channel.modlog);
+        const modlog = message.guild.channels.cache.get(config.channels.modlog);
 
-        embed.setTimestamp(new Date(msg.createdAt.getTime())).setURL(`https://discord.com/channels/${message.guild.id}/${message.channel.id}/${msg.id}`);
+        embed.setTimestamp(new Date(msg.createdAt.getTime())).setDescription(`<@${message.author.id}>'s [New Stat Rolls](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${msg.id}):\n`+statText.join('\n')+`\nTotal = \`${total}\``);
 
         modlog.send(embed);
         return;
