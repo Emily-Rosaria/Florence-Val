@@ -6,7 +6,7 @@ module.exports = {
   name: 'chars', // The name of the command
   aliases: ['getchars','listchars','characters'],
   description: 'Lists the characters of a user.', // The description of the command (for help text)
-  args: true, // Specified that this command doesn't need any data other than the command
+  args: false, // Specified that this command doesn't need any data other than the command
   perms: false,
   allowDM: true,
   cooldown: 3,
