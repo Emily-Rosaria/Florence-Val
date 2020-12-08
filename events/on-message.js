@@ -36,7 +36,7 @@ module.exports = async function (message) {
   // check if the message is a valid command
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-  const roleCache = message.member.roles.cache; // get role cache
+  const roleCache = message.channel.type == "dm" ? [] : message.member.roles.cache; // get role cache
 
   if (!command) {
     if (config.channels.clean.includes(message.channel.id) && !roleCache.includes(config.perms.admin)
