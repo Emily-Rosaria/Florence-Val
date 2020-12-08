@@ -43,6 +43,16 @@ var QuestSchema = new Schema({
   startTime: {type: Number, default: (new Date()).getTime()} // start time of the quest (or first post in the channel) in unix ms
 });
 
+var StoredStatsSchema = new Schema({
+  rolls: [StatSchema], // array of 6 lots of 4d6kh3 - last stat roll kept saved before it's committed to a character
+  timestamp: Number, // unix time in ms of statroll message
+  messageID: String // id of message
+});
+
+StoredStatsSchema.virtual('total').get(function() {
+  return this.rolls.reduce((acc,cur)=>acc+cur.total,0);
+});
+
 var UserSchema = new Schema({ // Create Schema
   _id: {type: String, required: true}, // ID of user on Discord
   quests: [QuestSchema], // list of quests the user is currently doing (i.e. rp channels they're writing in)
@@ -51,11 +61,7 @@ var UserSchema = new Schema({ // Create Schema
     of: String // document "keys (for use with a document model)"
   },
   characters: {type: [CharacterSchema], default: {}},
-  lastStats: {
-    rolls: [StatSchema], // array of 6 lots of 4d6kh3 - last stat roll kept saved before it's committed to a character
-    timestamp: Number, // unix time in ms of statroll message
-    messageID: String // id of message
-  },
+  lastStats: StoredStatsSchema, // last stats officially rolled and such
   totalWords: {type: Number, default: 0}, // total words written by this users
   totalChars: {type: Number, default: 0} // character count - as in total letters written by this user
 });

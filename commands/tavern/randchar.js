@@ -105,7 +105,7 @@ module.exports = {
               messageID: msg.id
             }
           }
-        },{upsert:true}).exec();
+        },{upsert:true, setDefaultsOnInsert: true}).exec();
         const modlog = message.guild.channels.cache.get(config.channel.modlog);
 
         embed.setTimestamp(new Date(msg.createdAt.getTime())).setURL(`https://discord.com/channels/${message.guild.id}/${message.channel.id}/${msg.id}`);
