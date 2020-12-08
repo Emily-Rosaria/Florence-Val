@@ -44,7 +44,7 @@ module.exports = {
       let total = 0;
       const statText = formattedRolls.map((r,i)=>{
         const rTotal = r.roll1 + r.roll2 + r.roll3;
-        total = rTotal;
+        total = total + rTotal;
         return `Stat ${i+1}: \`${rTotal}\` (${r.roll1}, ${r.roll2}, ${r.roll3}, ~~${r.roll4}~~)`;
       });
       const embed = new Discord.MessageEmbed()
@@ -76,7 +76,7 @@ module.exports = {
         let total = 0;
         const statText = formattedRolls.map((r,i)=>{
           const rTotal = r.roll1 + r.roll2 + r.roll3;
-          total = rTotal;
+          total = total + rTotal;
           return `Stat ${i+1}: \`${rTotal}\` (${r.roll1}, ${r.roll2}, ${r.roll3}, ~~${r.roll4}~~)`;
         });
         const embed = new Discord.MessageEmbed()
