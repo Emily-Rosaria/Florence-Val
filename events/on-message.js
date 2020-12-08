@@ -36,8 +36,11 @@ module.exports = async function (message) {
   // check if the message is a valid command
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+  const roleCache = message.member.roles.cache; // get role cache
+
   if (!command) {
-    if (config.channels.clean.includes(message.channel.id)) {
+    if (config.channels.clean.includes(message.channel.id) && !roleCache.includes(config.perms.admin)
+    && ![config.perms.dev,config.perms.luc].includes(message.author.id)) {
       message.delete({timeout: timeout: 2*60*1000});
     }
     return;
@@ -84,8 +87,6 @@ module.exports = async function (message) {
         return message.reply("This command is not available for use in DMs.")
       }
     } else if (message.author.id != config.perms.dev) {
-      const roleCache = message.member.roles.cache; // get role cache
-
       // check perms for admin commands
       if (!roleCache.has(config.perms.admin) || !message.member.hasPermission("ADMINISTRATOR")) {
         if (command.perms == "admin") {
