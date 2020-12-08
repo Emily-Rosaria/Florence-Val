@@ -13,11 +13,11 @@ module.exports = {
   cooldown: 5,
   usage: '<user> <character-name OR character-key>', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
-    const arg = args[0].match(/d+/);
+    const arg = args[0].match(/\d+/);
     if (!arg) {
       return message.reply("Invalid user argument. Make sure to ping the user you wish to approve, or note down their userID.");
     }
-    const user = client.users.cache.get(arg[0]);
+    const user = message.client.users.cache.get(arg[0]);
     if (!user) {
       return message.reply("Could not find user's data in cache. Are you sure they're still in the server? If you used their ID, try pinging them instead.");
     }
@@ -27,26 +27,29 @@ module.exports = {
       return message.reply("No stored user/character data could be found for `"+user.tag+"`. Be sure they generated their character's stats officially by using the `$randchar` command at <#"+config.channels.statRolls+">, and that they bound it to a character's name via the `$newchar <character-name>` command.");
     }
     const name = args.slice(1).join(' ').replace(/[“"”]/,'');
-    const nameID = mongoose.isValidObjectId(name) ? mongoose.Types.ObjectId(name) || false;
+    const nameID = mongoose.isValidObjectId(name) ? mongoose.Types.ObjectId(name) : false;
 
-    const newData = !nameID ? await Users.findOneAndUpdate({_id: user.id},{
-      "$pull": {
-        "characters": {
-          "name": {"$eq": name}
-        }
-      }
-    }).exec() : await Users.findOneAndUpdate({_id: user.id},{
-      "$pull": {
-        "characters": {
-          "$or": [
-            "_id": {"$eq": nameID},
+    if (!nameID) {
+      await Users.findOneAndUpdate({_id: user.id},{
+        "$pull": {
+          "characters": {
             "name": {"$eq": name}
-          ]
+          }
         }
-      }
-    }).exec();
-
-    const deleted = newData.characters.find(c=>c.name==name||c._id==nameID);
+      }).exec()
+    } else {
+      await Users.findOneAndUpdate({_id: user.id},{
+        "$pull": {
+          "characters": {
+            "$or": [
+              {"_id": {"$eq": nameID}},
+              {"name": {"$eq": name}}
+            ]
+          }
+        }
+      }).exec();
+    };
+    const deleted = userData.characters.find(c=>c.name==name||c._id==nameID);
     if (deleted) {
       let total = 0;
       const stats = rolls.length > 0 ? rolls.map((r,i)=>{
