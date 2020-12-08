@@ -9,6 +9,8 @@ module.exports = async function (message) {
     return;
   }
 
+  const client = message.client;
+
   const botPing = ["<@" + message.client.user.id + ">","<@!" + message.client.user.id + ">"];
 
   // Find if message begins with a valid command prefix
@@ -23,6 +25,7 @@ module.exports = async function (message) {
     } else if (message.channel.type == "dm" && message.content.toLowerCase() == "ping") {
       message.reply("pong!");
     }
+    return;
   }
 
   // Split commands and arguments from message so they can be passed to functions
