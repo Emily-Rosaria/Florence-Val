@@ -101,7 +101,7 @@ module.exports = {
           "$set": {
             lastStats: {
               rolls: formattedRolls,
-              timestamp: msg.createdAt().getTime(),
+              timestamp: msg.createdAt.getTime(),
               messageID: msg.id
             }
           }
