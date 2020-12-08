@@ -18,7 +18,7 @@ module.exports = {
     const userID = userArg[0];
     const userData = await Users.findByIdAndUpdate(userID,{
       "$unset": {
-        field: "lastStats"
+        lastStats: ""
       }
     },{new: false});
     if (userData && userData.lastStats && userData.lastStats.rolls) {
