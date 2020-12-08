@@ -63,7 +63,7 @@ var UserSchema = new Schema({ // Create Schema
     of: String // document "keys (for use with a document model)"
   },
   characters: {type: [CharacterSchema], default: [{}]},
-  cachedSlots: {type: Number, default: 1),
+  cachedSlots: {type: Number, default: 1},
   lastStats: StoredStatsSchema, // last stats officially rolled and such
   totalWords: {type: Number, default: 0}, // total words written by this users
   totalChars: {type: Number, default: 0} // character count - as in total letters written by this user

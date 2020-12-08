@@ -32,7 +32,7 @@ module.exports = {
 
     Users.updateOne({_id: member.user.id, "characters._id": pending._id},{
       "$set": {
-        approved: true;
+        approved: true
       }
     });
 
