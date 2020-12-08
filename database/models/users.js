@@ -27,8 +27,13 @@ CharacterSchema.virtual('totalStats').get(function() {
   return this.baseStats.reduce((acc,cur)=>acc+cur.total,0);
 });
 
-CharacterSchema.virtual('exp').get(function() {
-  return this.baseStats.reduce((acc,cur)=>acc+cur.total,0);
+CharacterSchema.virtual('level').get(function() {
+  for (const levelexp of config.cumulativeExp) {
+    if (this.exp < levelexp) {
+      return l;
+    }
+  }
+  return 20;
 });
 
 var QuestSchema = new Schema({
