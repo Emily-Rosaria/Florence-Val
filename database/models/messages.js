@@ -12,6 +12,15 @@ var MessageSchema = new Schema({
   quest: {type: Boolean, required: true}
 });
 
+MessageSchema.statics.prune = async function (days) {
+  const now = new Date().getTime();
+  const time = !days || isNaN(days) ? 14 : Number(days);
+  const oneDay = 24*60*60*1000; // in ms
+  const pastTimestamp = time < 14 ? now - 14*oneDay : (time > 90 ? now - 90*oneDay : now - pastTimestamp*oneDay);
+  const delet = await this.deleteMany({quest: false, "$lte": {timestamp: pastTimestamp}}).exec();
+  return delet;
+}
+
 // Model
 var messages = mongoose.model("messages", MessageSchema); // Create collection model from schema
 module.exports = messages; // export model

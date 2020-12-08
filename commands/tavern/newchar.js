@@ -13,7 +13,7 @@ module.exports = {
   usage: '', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
     const charName = args.join(' ').replace(/[“"”]/,'');
-    const userData = Users.findById(message.author.id);
+    const userData = await Users.findById(message.author.id).exec();
     if (!userData || !userData.lastStats || !userData.lastStats.rolls) {
       return message.reply("No stored character roll data could be found. Be sure to generate your character's stats officially by using the `$randchar` command at <#"+config.channels.statRolls+">").then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
@@ -33,7 +33,17 @@ module.exports = {
           }
         });
       }
+      const slots = await Users.updateCache(message.member);
+      if (slots <= userData.characters.length) {
+        return message.reply(`You already have ${userData.characters.length} out of ${slots} character slots filled. Try to play a bit more and rank up to earn more character slots. If you wish to drop one of your characters, contact a mod. If you believe you should have more slots, contact an admin.`).then(msg=>{
+          if (msg.channel.id == config.channels.statRolls) {
+            message.delete({timeout: 60*1000});
+            msg.delete({timeout: 60*1000});
+          }
+        });
+      }
     }
+
     if (charName.length > 40) {
       return message.reply("Your character's name is too long. Try to keep it below 40 characters.").then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
@@ -43,6 +53,7 @@ module.exports = {
       });
     }
 
+    const now = new Date()
     const rolls = userData.lastStats.rolls;
     const newChar = {
       name: charName, // the character's name
@@ -52,9 +63,9 @@ module.exports = {
       totalWords: 0, // total words written for this character
       totalChars: 0, // character count - as in total letters written for this character
       approved: false, // whether or not the character is approved yet
-      createdAt: (new Date()).getTime()
+      createdAt: now.getTime()
     }
-    if (!userData.characters || typeof userData.characters != "array") {
+    if (!userData.characters || !Array.isArray(userData.characters)) {
       await Users.updateOne({_id:message.author.id},{
         "$set": {
           characters: []
@@ -79,10 +90,10 @@ module.exports = {
     const embed = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
     .setTitle(`Character Created: ${charName}!`)
-    .setDescription(`<@${message.author.id}>'s Created a new character using these [Official Stat Rolls](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${msg.id}):\n`+statText.join('\n')+`\nTotal = \`${total}\``)
+    .setDescription(`<@${message.author.id}>'s Created a new character named "${charName}" using these [Official Stat Rolls](https://discord.com/channels/${message.guild.id}/${config.channels.statRolls}/${userData.lastStats.messageID}):\n`+statText.join('\n')+`\nTotal = \`${total}\``)
     .setColor('#0078d7')
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
-    .setTimestamp()
+    .setTimestamp(now.getTime())
     modlog.send({embed: embed});
     message.channel.send({content: `<@${message.author.id}>`,embed: embed});
     message.delete();

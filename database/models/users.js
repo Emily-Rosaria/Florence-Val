@@ -63,6 +63,7 @@ var UserSchema = new Schema({ // Create Schema
     of: String // document "keys (for use with a document model)"
   },
   characters: {type: [CharacterSchema], default: [{}]},
+  cachedSlots: {type: Number, default: 1),
   lastStats: StoredStatsSchema, // last stats officially rolled and such
   totalWords: {type: Number, default: 0}, // total words written by this users
   totalChars: {type: Number, default: 0} // character count - as in total letters written by this user
@@ -71,6 +72,47 @@ var UserSchema = new Schema({ // Create Schema
 UserSchema.virtual('id').get(function() {
   return this._id;
 });
+
+UserSchema.method('getRanks', function() {
+  if (!this.characters || !Array.isArray(this.characters) || this.characters.length == 0) {
+    return null;
+  }
+  const levels = [];
+  for (const char of this.characters) {
+    levels.push(char.level);
+  }
+  const ranks = levels.sort((a,b)=>a-b).reduce((acc,cur)=>{
+    cRank = config.ranks.find(r=>cur<r.level);
+    if (acc.length == 0 || (acc.length > 0 && acc.slice(-1)[0] != cRank.id)) {
+      return acc.concat(cRank.id);
+    } else {
+      return acc;
+    }
+  },[]);
+  return ranks;
+});
+
+UserSchema.statics.updateCache = async function (member) {
+  let baseSlots = 1;
+  for (const role of config.ranks) {
+    if (member.roles.cache.has(role.id) && role.slots > baseSlots) {
+      baseSlots = role.slots;
+    }
+  }
+  let bonus = 0;
+  for (const role of config.specialRanks) {
+    if (member.roles.cache.has(role.id) && role.extraSlots > bonus) {
+      bonus = role.extraSlots;
+    }
+  }
+  const slots = baseSlots+bonus;
+  await this.findByIdAndUpdate(member.user.id,{
+    "$set" : {
+      cachedSlots: slots
+    }
+  }).exec();
+  return slots;
+}
 
 // Model
 var users = mongoose.model("users", UserSchema); // Create collection model from schema

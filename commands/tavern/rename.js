@@ -3,8 +3,8 @@ const Users = require("./../../database/models/users.js"); // users model
 const Discord = require('discord.js'); // Image embed
 
 module.exports = {
-  name: 'newchar', // The name of the command
-  aliases: ['createchar'],
+  name: 'rename', // The name of the command
+  aliases: ['renamechar','setname','newname'],
   description: 'Creates character data with your stored stat data.', // The description of the command (for help text)
   args: 2, // Specified that this command doesn't need any data other than the command
   perms: false,
@@ -21,7 +21,7 @@ module.exports = {
     }
 
     const userData = Users.findById(message.author.id);
-    if (!userData || !userData.characters || typeof userData.characters != "array" || userData.characters.length == 0) {
+    if (!userData || !userData.characters || !Array.isArray(userData.characters) || userData.characters.length == 0) {
       return message.reply("No stored character data could be found. Be sure to generate your character's stats officially by using the `$randchar` command at <#"+config.channels.statRolls+">, then bind it to a character's name via the `$newchar <character-name>` command.").then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
           message.delete();
