@@ -63,7 +63,7 @@ module.exports = {
 
       console.log('Events done, now reloading config.');
 
-      delete require.cache[require.resolve('./../../config.json');
+      delete require.cache[require.resolve('./../../config.json')];
 
       message.reply('Done! Outside of the database and index.js, the bot should be fully updated! May require an additional reboot for the update command to be affected.');
     },

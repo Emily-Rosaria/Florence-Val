@@ -1,5 +1,5 @@
-const config = require('./../config.json'); // load bot config
-const Users = require("./../database/models/users.js"); // users model
+const config = require('./../../config.json'); // load bot config
+const Users = require("./../../database/models/users.js"); // users model
 const Discord = require('discord.js'); // Image embed
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
   perms: false,
   allowDM: true,
   usage: '', // Help text to explain how to use the command (if it had any arguments)
-  execute(message, args) {
+  async execute(message, args) {
     const user = !!args[0] ? message.client.users.cache.get(args[0].match(/\d+/)[0]) || message.author : message.author;
     const userData = await Users.findById(user.id).exec();
     if (userData && userData.lastStats && userData.lastStats.rolls) {

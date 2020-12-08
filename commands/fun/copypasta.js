@@ -1,6 +1,6 @@
 const Reddit = require('reddit'); // Redditz
 const Discord = require('discord.js'); // Image embed
-const config = require('./../config.json'); // load bot config
+const config = require('./../../config.json'); // load bot config
 
 module.exports = {
   name: 'copypasta', // The name of the command

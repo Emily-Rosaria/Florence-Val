@@ -1,5 +1,5 @@
-const config = require('./../config.json'); // load bot config
-const Users = require("./../database/models/users.js"); // users model
+const config = require('./../../config.json'); // load bot config
+const Users = require("./../../database/models/users.js"); // users model
 
 const getRolls = (min,max) => {
   let total = 0;
@@ -27,7 +27,7 @@ module.exports = {
   perms: false,
   allowDM: true,
   usage: '', // Help text to explain how to use the command (if it had any arguments)
-  execute(message, args) {
+  async execute(message, args) {
     if (message.channel.id != config.channels.statRolls) {
       const rolls = getRolls(config.statMin,config.statMax);
       const formattedRolls = rolls.map(r=>{
@@ -86,7 +86,7 @@ module.exports = {
         const msg = await message.reply(embed);
 
         await Users.findByIdAndUpdate(message.author.id,{
-          "$set":
+          "$set": {
             lastStats: {
               rolls: formattedRolls,
               timestamp: msg.createdAt().getTime(),

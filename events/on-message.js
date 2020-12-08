@@ -81,7 +81,7 @@ module.exports = async function (message) {
       if (!roleCache.has(config.perms.admin) || !message.member.hasPermission("ADMINISTRATOR")) {
         if (command.perms == "admin") {
           return message.reply("You do not have the required permissions to use this command; this command is only for admins.");
-        } else if (!roleCache.has(config.perms.mod) {
+        } else if (!roleCache.has(config.perms.mod)) {
           if (command.perms == "mod") {
             return message.reply("You do not have the required permissions to use this command; this command is only for moderators.");
           } else if (command.perms == "writer" && !roleCache.has(config.perms.writer)) {

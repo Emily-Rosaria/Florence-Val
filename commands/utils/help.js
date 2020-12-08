@@ -1,4 +1,4 @@
-const config = require('./../config.json'); // load bot config
+const config = require('./../../config.json'); // load bot config
 
 /**
  * Runs the help command, explaining each available command to the user.
