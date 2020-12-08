@@ -41,7 +41,7 @@ module.exports = async function (message) {
   if (!command) {
     if (config.channels.clean.includes(message.channel.id) && !roleCache.includes(config.perms.admin)
     && ![config.perms.dev,config.perms.luc].includes(message.author.id)) {
-      message.delete({timeout: timeout: 2*60*1000});
+      message.delete({timeout: 2*60*1000});
     }
     return;
   }
