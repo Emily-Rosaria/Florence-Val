@@ -74,6 +74,5 @@ module.exports = {
         msg.delete({timeout: 2*60*1000});
       }
     });
-    message.delete();
   },
 };
