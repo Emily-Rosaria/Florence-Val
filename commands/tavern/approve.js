@@ -12,7 +12,7 @@ module.exports = {
   cooldown: 5,
   usage: '<user-to-approve>', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
-    const arg = args[0].match(/d+/);
+    const arg = args[0].match(/\d+/);
     if (!arg) {
       return message.reply("Invalid user argument. Make sure to ping the user you wish to approve, or note down their userID.");
     }
@@ -37,7 +37,7 @@ module.exports = {
         "characters.$.gold": 0, // gold pieces they character has
         "characters.$.tokens": 0 // tokens for spending on loot rolls
       }
-    });
+    }).exec();
 
     if (!member.roles.cache.has(config.perms.writer)) {
       member.roles.add(config.perms.writer);
@@ -59,7 +59,9 @@ module.exports = {
     .addField("Character Sheets","Post your approved character sheet at <#785667411562332180> so other members can find it more easily.")
     .addField("Roleplaying","And now, you can head over to the roleplay channels to start roleplaying! Remember, all new characters are only level 3, and they're new to the tavern realm. Head to <#785647908833853440> if you have any questions, ")
     .addField("Catfact",fact)
+    .setColor('#87ceeb')
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
+    .setTimestamp()
     message.channel.send({content: `<@${member.user.id}>`, embed: embed});
 
     const modlog = message.guild.channels.cache.get(config.channels.modlog);
@@ -68,7 +70,7 @@ module.exports = {
     .setAuthor(member.user.username, member.user.displayAvatarURL())
     .setTitle(`Character Approved: ${pending.name}!`)
     .setDescription(`<@${member.user.id}>'s character named "${pending.name}" was approved by <@${message.author.id}>. [Click Here](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}) to jump to the channel.`)
-    .addField('Configure Gold',"You can set their character's remaining starting gold by using the `$setgold "+member.user.id+" "+pending._id+" <gold>` or otherwise by using the `$setgold <userID or mention> <character ID or name> <gold amount>` command.")
+    .addField('Configure Gold',"Use the `$setgold "+member.user.id+" "+pending._id+" <gold>` to set their character's remaining starting gold.")
     .setColor('#0078d7')
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
     .setTimestamp()
