@@ -39,7 +39,7 @@ module.exports = {
       });
     }
 
-    const id = userData.character.find(c=>c.name == names[0]);
+    const id = userData.characters.find(c=>c.name == names[0]);
     if (!id) {
       return message.reply(`No character with the name "${names[0]}" could be found in your character list. Be sure to surround any multi-word names with "quotation marks."`).then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
