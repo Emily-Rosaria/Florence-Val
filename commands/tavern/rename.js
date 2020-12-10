@@ -1,6 +1,7 @@
 const config = require('./../../config.json'); // load bot config
 const Users = require("./../../database/models/users.js"); // users model
 const Discord = require('discord.js'); // Image embed
+const mongoose = require('mongoose');
 
 module.exports = {
   name: 'rename', // The name of the command
@@ -10,11 +11,11 @@ module.exports = {
   perms: false,
   cooldown: 5,
   allowDM: false,
-  usage: '', // Help text to explain how to use the command (if it had any arguments)
+  usage: '<old-name or ID> <new-name>', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
     let names = args.slice(0,2).map(a=>a.replace(/[“"”]/,''));
     if (args.length > 2) {
-      const tempNames = args.join(' ').split(/[“"”]/g).filter(m=>m!='').map(m=>m.trim());
+      const tempNames = args.join(' ').split(/[“"”]/g).map(m=>m.trim()).filter(m=>m!='');
       if (tempNames && tempNames.length > 1) {
         names = tempNames.slice(0,2);
       }
@@ -38,16 +39,18 @@ module.exports = {
         }
       });
     }
-
-    const id = userData.characters.find(c=>c.name == names[0]);
-    if (!id) {
-      return message.reply(`No character with the name "${names[0]}" could be found in your character list. Be sure to surround any multi-word names with "quotation marks."`).then(msg=>{
+    names[0] = mongoose.isValidObjectId(names[0]) ? mongoose.Types.ObjectId(names[0]) : names[0];
+    const char = userData.characters.find(c=>c.name == names[0]||c._id == names[0]);
+    if (!char) {
+      return message.reply(`No character with the name or ID "${names[0]}" could be found in your character list. Be sure to surround any multi-word names with "quotation marks" and remember names are case sensitive.`).then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
           message.delete();
           msg.delete({timeout: 30*1000});
         }
       });
     }
+    names[0] = char.name;
+    const id = char._id;
 
     await Users.findOneAndUpdate({_id:message.author.id, "characters._id": id},{
       "$set": {
