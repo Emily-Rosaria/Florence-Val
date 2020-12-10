@@ -15,7 +15,7 @@ module.exports = {
     let names = args.slice(0,2).map(a=>a.replace(/[“"”]/,''));
     if (args.length > 2) {
       const tempNames = args.join(' ').split(/[“"”]/g).filter(m=>m!='').map(m=>m.trim());
-      if (tempNames && tempName.length > 1) {
+      if (tempNames && tempNames.length > 1) {
         names = tempNames.slice(0,2);
       }
     }

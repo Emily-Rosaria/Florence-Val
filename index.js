@@ -21,6 +21,12 @@ const database = config.dbName; // Database name
 const onDelete = require('./events/on-delete.js');
 const onEdit = require('./events/on-edit.js');
 const onMessage = require('./events/on-message.js');
+const onReactionAdd = require('./events/on-reaction-add.js');
+const onReactionRemove = require('./events/on-reaction-remove.js');
+const onReactionTake = require('./events/on-reaction-take.js'); // mod/bot removals of reactions
+const onReactionClear = require('./events/on-reaction-clear.js'); // clearing of message reactions
+
+
 
 const client = new Discord.Client({partials: ['MESSAGE']}); // Initiates the client
 
@@ -69,6 +75,24 @@ client.on('messageDelete', async message => {
 client.on('messageUpdate', async (oldMessage, newMessage) => {
     if (newMessage.author.bot) {return} // don't respond to bots
     onEdit(oldMessage, newMessage);
+});
+
+client.on('messageReactionAdd', async (reaction, user) => {
+    if (user.bot) {return}
+    onReactionAdd(reaction, user);
+});
+
+client.on('messageReactionRemove', async (reaction, user) => {
+    if (user.bot) {return}
+    onReactionRemove(reaction, user);
+});
+
+client.on('messageReactionRemoveEmoji', async (reaction) => {
+    onReactionTake(reaction);
+});
+
+client.on('messageReactionRemoveAll', async (message) => {
+    onReactionClear(message);
 });
 
 connectDB("mongodb://localhost:27017/"+database);
