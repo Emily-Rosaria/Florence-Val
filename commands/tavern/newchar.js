@@ -79,20 +79,21 @@ module.exports = {
       await Users.updateOne({_id: message.author.id},{
         "$set": {
           characters: [newChar]
+        },
+        "$unset": {
+          lastStats: ""
         }
       }).exec();
     } else {
-      const newData = await Users.updateOne({_id: message.author.id},{
+      await Users.updateOne({_id: message.author.id},{
         "$push": {
           characters: newChar
+        },
+        "$unset": {
+          lastStats: ""
         }
       }).exec();
     }
-    await Users.updateOne({_id: message.author.id},{
-      "$unset": {
-        lastStats: ""
-      }
-    },{new: false});
 
     const modlog = message.guild.channels.cache.get(config.channels.modlog);
 
