@@ -73,7 +73,7 @@ client.on('messageDelete', async message => {
 });
 
 client.on('messageUpdate', async (oldMessage, newMessage) => {
-    if (message.author && newMessage.author.bot) {return} // don't respond to bots
+    if (oldMessage.author && newMessage.author.bot) {return} // don't respond to bots
     onEdit(oldMessage, newMessage);
 });
 
