@@ -20,7 +20,7 @@ module.exports = {
       }
     }
 
-    const userData = Users.findById(message.author.id);
+    const userData = await Users.findById(message.author.id).exec();
     if (!userData || !userData.characters || !Array.isArray(userData.characters) || userData.characters.length == 0) {
       return message.reply("No stored character data could be found. Be sure to generate your character's stats officially by using the `$randchar` command at <#"+config.channels.statRolls+">, then bind it to a character's name via the `$newchar <character-name>` command.").then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
