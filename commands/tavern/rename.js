@@ -13,12 +13,21 @@ module.exports = {
   allowDM: false,
   usage: '<old-name or ID> <new-name>', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
-    let names = args.slice(0,2).map(a=>a.replace(/[“"”]/,''));
+    let names = args.slice(0,2).map(a=>a.replace(/[“"”]/,'').trim()).filter(m=>m!='');
     if (args.length > 2) {
       const tempNames = args.join(' ').split(/[“"”]/g).map(m=>m.trim()).filter(m=>m!='');
       if (tempNames && tempNames.length > 1) {
         names = tempNames.slice(0,2);
       }
+    }
+
+    if (names.length < 2) {
+      return message.reply("Less than two arguments recieved. This command needs both an old name and new name argument. If your character's name is blank due to a glitch, try to get it's ID via the `$chars` command, then use that in place of its old name.").then(msg=>{
+        if (msg.channel.id == config.channels.statRolls) {
+          message.delete();
+          msg.delete({timeout: 45*1000});
+        }
+      });
     }
 
     const userData = await Users.findById(message.author.id).exec();
@@ -35,7 +44,7 @@ module.exports = {
       return message.reply("Your new character name is too long. Try to keep it below 40 characters.").then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
           message.delete();
-          msg.delete({timeout: 30*1000});
+          msg.delete({timeout: 45*1000});
         }
       });
     }
@@ -45,7 +54,7 @@ module.exports = {
       return message.reply(`No character with the name or ID "${names[0]}" could be found in your character list. Be sure to surround any multi-word names with "quotation marks" and remember names are case sensitive. User \`$chars\` to view some brief data about your characters.`).then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
           message.delete();
-          msg.delete({timeout: 30*1000});
+          msg.delete({timeout: 45*1000});
         }
       });
     }

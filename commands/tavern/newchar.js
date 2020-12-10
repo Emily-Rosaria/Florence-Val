@@ -74,23 +74,24 @@ module.exports = {
       createdAt: now.getTime()
     }
     if (!userData.characters || !Array.isArray(userData.characters)) {
-      await Users.updateOne({_id:message.author.id},{
+      await Users.updateOne({_id: message.author.id},{
         "$set": {
           characters: [newChar]
         }
       }).exec();
     } else {
-      const newData = await Users.updateOne({_id:message.author.id},{
+      const newData = await Users.updateOne({_id: message.author.id},{
         "$push": {
           characters: newChar
         }
       }).exec();
     }
-    const userData = await Users.findByIdAndUpdate(userID,{
+    await Users.updateOne({_id: message.author.id},{
       "$unset": {
         lastStats: ""
       }
     },{new: false});
+
     const modlog = message.guild.channels.cache.get(config.channels.modlog);
 
     let total = 0;
