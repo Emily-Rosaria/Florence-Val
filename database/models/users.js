@@ -18,6 +18,8 @@ var CharacterSchema = new Schema({
   name: {type: String, required: true}, // the character's name
   baseStats: [StatSchema],
   exp: {type: Number, default: config.cumulativeExp[config.startingLevel-1]}, // total exp the character has
+  gold: {type: Number, default: 0},
+  tokens: {type: Number, default: 0},
   downtime: {type: Number, default: 0}, // number of downtime units stored
   totalWords: {type: Number, default: 0}, // total words written for this character
   totalChars: {type: Number, default: 0}, // character count - as in total letters written for this character
