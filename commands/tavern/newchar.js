@@ -67,6 +67,8 @@ module.exports = {
       name: charName, // the character's name
       baseStats: rolls,
       exp: config.cumulativeExp[config.startingLevel-1], // total exp the character has
+      gold: 0, // gold pieces they character has
+      tokens: 0, // tokens for spending on loot rolls
       downtime: 0, // number of downtime units stored
       totalWords: 0, // total words written for this character
       totalChars: 0, // character count - as in total letters written for this character

@@ -33,7 +33,9 @@ module.exports = {
     Users.updateOne({_id: member.user.id, "characters._id": pending._id},{
       "$set": {
         "characters.$.approved": true,
-        "characters.$.exp": config.cumulativeExp[config.startingLevel-1]
+        "characters.$.exp": config.cumulativeExp[config.startingLevel-1],
+        "characters.$.gold": 0, // gold pieces they character has
+        "characters.$.tokens": 0 // tokens for spending on loot rolls
       }
     });
 
@@ -66,6 +68,7 @@ module.exports = {
     .setAuthor(member.user.username, member.user.displayAvatarURL())
     .setTitle(`Character Approved: ${pending.name}!`)
     .setDescription(`<@${member.user.id}>'s character named "${pending.name}" was approved by <@${message.author.id}>. [Click Here](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}) to jump to the channel.`)
+    .addField('Configure Gold',"You can set their character's remaining starting gold by using the `$setgold "+member.user.id+" "+pending._id+" <gold>` or otherwise by using the `$setgold <userID or mention> <character ID or name> <gold amount>` command.")
     .setColor('#0078d7')
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
     .setTimestamp()
