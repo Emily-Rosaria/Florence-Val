@@ -39,10 +39,10 @@ module.exports = {
         }
       });
     }
-    names[0] = mongoose.isValidObjectId(names[0]) ? mongoose.Types.ObjectId(names[0]) : names[0];
-    const char = userData.characters.find(c=>c.name == names[0]||c._id == names[0]);
+    const tempID = mongoose.isValidObjectId(names[0]) ? mongoose.Types.ObjectId(names[0]) : names[0];
+    const char = userData.characters.find(c=>c.name == names[0]||c._id == tempID);
     if (!char) {
-      return message.reply(`No character with the name or ID "${names[0]}" could be found in your character list. Be sure to surround any multi-word names with "quotation marks" and remember names are case sensitive.`).then(msg=>{
+      return message.reply(`No character with the name or ID "${names[0]}" could be found in your character list. Be sure to surround any multi-word names with "quotation marks" and remember names are case sensitive. User \`$chars\` to view some brief data about your characters.`).then(msg=>{
         if (msg.channel.id == config.channels.statRolls) {
           message.delete();
           msg.delete({timeout: 30*1000});
