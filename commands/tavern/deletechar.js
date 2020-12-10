@@ -8,7 +8,7 @@ module.exports = {
   description: 'Deletes a user\'s character. Only mods can delete characters.', // The description of the command (for help text)
   aliases: ['removechar','retirechar'],
   args: 2, // Specified that this command doesn't need any data other than the command
-  perms: 'mod',
+  perms: 'admin',
   allowDM: false,
   cooldown: 5,
   usage: '<user> <character-name OR character-key>', // Help text to explain how to use the command (if it had any arguments)
