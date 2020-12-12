@@ -14,7 +14,7 @@ module.exports = {
   async execute(message, args) {
     let user = message.author;
     if (args && args.length > 0) {
-      const uID = args.match(/\d+/);
+      const uID = args[0].match(/\d+/);
       const tempU = message.client.users.cache.get(uID[0]);
       if (tempU) {
         user = tempU;

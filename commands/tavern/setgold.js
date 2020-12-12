@@ -28,7 +28,7 @@ module.exports = {
 
     let name = args.slice(1,-1).join(' ').replace(/[“"”]/,'')
     let id = mongoose.isValidObjectId(name) ? mongoose.Types.ObjectId(name) : name;
-    const char = userData.characters.find(c=>c.name.toLowerCase() == name.toLowerCase()||c._id == tempID||c._id == name);
+    const char = userData.characters.find(c=>c.name.toLowerCase() == name.toLowerCase()||c._id == id||c._id == name);
     if (!char) {
       return message.reply(`No character with the name or ID "${name}" could be found in this user's character list. User \`$chars\` to view some brief data about their characters.`);
     }
