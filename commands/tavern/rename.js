@@ -61,11 +61,11 @@ module.exports = {
     names[0] = char.name;
     const id = char._id;
 
-    await Users.findOneAndUpdate({_id:message.author.id, "characters._id": id},{
+    await Users.updateOne({_id:message.author.id, "characters._id": id},{
       "$set": {
         "characters.$.name": names[1]
       }
-    },{new: true}).exec();
+    }).exec();
 
     const modlog = message.guild.channels.cache.get(config.channels.modlog);
 

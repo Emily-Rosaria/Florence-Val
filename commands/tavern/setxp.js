@@ -16,7 +16,7 @@ module.exports = {
   async execute(message, args) {
     const arg = args[0].match(/\d+/);
     if (!arg) {
-      return message.reply("Invalid user argument. Make sure to ping the user you wish to approve, or note down their userID.");
+      return message.reply("Invalid user argument. Make sure to ping the user you wish to modify, or note down their userID.");
     }
     const member = message.guild.member(arg[0]);
     if (!member) {
@@ -36,7 +36,7 @@ module.exports = {
     name = char.name;
     id = char._id;
     const oldXP = char.exp || 0;
-    const newXP = isNaN(args.slice(-1)[0]) ? Number(args.slice(-1)[0]) : -1;
+    const newXP = !isNaN(args.slice(-1)[0]) ? Number(args.slice(-1)[0]) : -1;
 
     if (newXP < 0) {
       return message.reply(`${args.slice(-1)[0]} is an invalid exp value. Remember, it must be the non-negative number. You don't need to write the "xp" at the end of the value.`);
@@ -46,9 +46,9 @@ module.exports = {
       return message.reply(`The character ${name} with id ${id} is not yet approved. Please make sure to approve them before adjusting their xp as appropriate (although xp should automatically be set in line with the default starting level).`);
     }
 
-    Users.updateOne({_id: member.user.id, "characters._id": char._id},{
+    await Users.updateOne({_id: member.user.id, "characters._id": char._id},{
       "$set": {
-        "characters.$.gold": newXP, // xp their character will have
+        "characters.$.exp": newXP // xp their character will have
       }
     }).exec();
 

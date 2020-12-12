@@ -15,7 +15,7 @@ module.exports = {
   async execute(message, args) {
     const arg = args[0].match(/\d+/);
     if (!arg) {
-      return message.reply("Invalid user argument. Make sure to ping the user you wish to approve, or note down their userID.");
+      return message.reply("Invalid user argument. Make sure to ping the user you wish to modify, or note down their userID.");
     }
     const member = message.guild.member(arg[0]);
     if (!member) {
@@ -35,7 +35,7 @@ module.exports = {
     name = char.name;
     id = char._id;
     const oldGold = char.gold || 0;
-    const newGold = isNaN(args.slice(-1)[0]) ? Number(args.slice(-1)[0]) : -1;
+    const newGold = !isNaN(args.slice(-1)[0]) ? Number(args.slice(-1)[0]) : -1;
 
     if (newGold < 0) {
       return message.reply(`${args.slice(-1)[0]} is an invalid gold value. Remember, it must be the non-negative number of gold pieces they have. Electrum/Silver/Copper pieces should be written as decimals. You don't need to write the "gp" at the end of the value.`);
@@ -45,10 +45,10 @@ module.exports = {
       return message.reply(`The character ${name} with id ${id} is not yet approved. Please make sure to approve them before adjusting their gold as appropriate.`);
     }
 
-    Users.updateOne({_id: member.user.id, "characters._id": char._id},{
+    await Users.updateOne({_id: member.user.id, "characters._id": char._id},{
       "$set": {
-        "characters.$.gold": newGold, // gold pieces they character has
-      }
+          "characters.$.gold": newGold
+        } // gold pieces the character has
     }).exec();
 
     const embed = new Discord.MessageEmbed()
