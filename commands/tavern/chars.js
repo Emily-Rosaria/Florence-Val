@@ -27,8 +27,9 @@ module.exports = {
     }
 
     const array = userData.characters.map(c=>{
-      const temp = c.approved ? "This character is approved." : "This character is not approved.";
-      return [c.name,temp+`\nThis character's id is \`${c._id}\`.`];
+      const name = c.name || 'This character';
+      const approved = c.approved ? `${name} is approved, has ${c.gold || '0'} gp and ${c.xp || '0'} xp. They also have ${c.tokens || '0'} tokens.` : `${name} is not yet approved.`;
+      return [c.name,approved+`\nThis character's id is \`${c._id}\`.`];
     });
 
     const embed = new Discord.MessageEmbed()
