@@ -4,7 +4,8 @@
   "description": "Fun bot for dnd",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "backup": "node backup.js"
   },
   "author": "Emily Rose",
   "license": "MIT",
