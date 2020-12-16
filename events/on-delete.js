@@ -31,17 +31,33 @@ module.exports = {
     const charChange = -oldMessageData.charCount;
 
     if (quest) {
-      await Users.updateOne({
-        _id: oldMessageData.author,
-        "quests._id": oldMessageData.channel
-      },{
-        "$inc": {
-          "quests.$.charCount": charChange,
-          "quests.$.wordCount": wordChange,
-          "totalChars": charChange,
-          "totalWords": wordChange
-        }
-      }).exec();
+      if (questData.wordCount + wordChange <= 0 || questData.charCount + charChange <= 0) {
+        await Users.updateOne({_id: oldMessageData.author},{
+          "$inc": {
+            "totalChars": charChange,
+            "totalWords": wordChange
+          },
+          {
+            "$pull": {
+              "quests": {
+                "_id": {"$eq": oldMessageData.channel}
+              }
+            }
+          }
+        }).exec();
+      } else {
+        await Users.updateOne({
+          _id: oldMessageData.author,
+          "quests._id": oldMessageData.channel
+        },{
+          "$inc": {
+            "quests.$.charCount": charChange,
+            "quests.$.wordCount": wordChange,
+            "totalChars": charChange,
+            "totalWords": wordChange
+          }
+        }).exec();
+      }
     } else {
       await Users.updateOne({_id: oldMessageData.author},{
         "$inc": {

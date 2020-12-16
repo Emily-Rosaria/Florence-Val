@@ -41,7 +41,7 @@ module.exports = {
     if (oldUserData) {
       if (oldUserData.quests && Array.isArray(oldUserData.quests)) {
         const oldQuestData = oldUserData.quests.find(q=>q._id==message.channel.id);
-        if (oldQuestData) {
+        if (oldQuestData && oldQuestData.totalWords > 0 && oldQuestData.totalChars > 0) {
           await Users.updateOne({
             _id: message.author.id,
             "quests._id": message.channel.id

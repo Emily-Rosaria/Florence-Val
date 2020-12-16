@@ -1,0 +1,768 @@
+[
+  {
+    "name":"Absorbing Tattoo, $v$",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "variants":["Acid","Cold","Fire","Force","Lightning","Necrotic","Poison","Psychic","Radiant","Thunder"],
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"Adamantine Armor, $b$",
+    "type":"Armor",
+    "rarity":"Uncommon",
+    "bases":["Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Alchemical Compendium",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"Alchemy Jug",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":false,
+    "source":"DMG, pg. 150"
+  },
+  {
+    "name":"All-Purpose Tool, +1"
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"All-Purpose Tool, +2"
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"All-Purpose Tool, +3"
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"$b$, +1",
+    "type":"Weapon",
+    "rarity":"Uncommon",
+    "bases":["Arrows","Crossbow Bolts","Sling Bullets","Blowgun Needles"],
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"$b$, +2",
+    "type":"Weapon",
+    "rarity":"Rare",
+    "bases":["Arrows","Crossbow Bolts","Sling Bullets","Blowgun Needles"],
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"$b$, +3",
+    "type":"Weapon",
+    "rarity":"Very Rare",
+    "bases":["Arrows","Crossbow Bolts","Sling Bullets","Blowgun Needles"],
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"Amulet of Health",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Amulet of Proof against Detection and Location",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Amulet of the Devout, +1",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"Amulet of the Devout, +2",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"Amulet of the Devout, +3",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 119"
+  },
+  {
+    "name":"Amulet of the Planes",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Animated Shield",
+    "type:":"Armor",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Apparatus of Kwalish",
+    "type":"Wondrous Item",
+    "rarity":"Legendary",
+    "attunement":false,
+    "major":true,
+    "source":"DMG, pg. 151"
+  },
+  {
+    "name":"Arcane Grimoire, +1",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 120"
+  },
+  {
+    "name":"Arcane Grimoire, +2",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 120"
+  },
+  {
+    "name":"Arcane Grimoire, +3",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 120"
+  },
+  {
+    "name":"Arcane Propulsion Arm",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"ERLW, pg. 276"
+  },
+  {
+    "name":"Armblade ($b$)"
+    "type":"Weapon",
+    "bases":["Club","Dagger","Handaxe","Javelin","Light","Mace","Quarterstaff","Sickle","Spear","Battleaxe","Flail","Lance","Longsword","Morningstar","Rapier","Scimitar","Shortsword","Trident","War","Warhammer","Whip"],
+    "rarity":"Common",
+    "attunement":true,
+    "major":false,
+    "source":"ERLW, pg. 276"
+  },
+  {
+    "name":"Armor of Gleaming, $b$",
+    "type":"Armor",
+    "bases":["Padded","Leather","Studded Leather","Hide","Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGtE, pg. 136"
+  },
+  {
+    "name":"Armor of Invulnerability",
+    "type":"Armor",
+    "rarity":"Legendary",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Armor of $v$ Resistance, $b$",
+    "type":"Armor",
+    "bases":["Padded","Leather","Studded Leather","Hide","Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "rarity":"Rare",
+    "variants":["Acid","Cold","Fire","Force","Lightning","Necrotic","Poison","Psychic","Radiant","Thunder"],
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Armor of Vulnerability ($v$)",
+    "type":"Armor",
+    "rarity":"Rare",
+    "variants":["Bludgeoning","Piercing","Slashing"],
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"$b$, +1",
+    "type":"Armor",
+    "bases":["Padded","Leather","Studded Leather","Hide","Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"$b$, +2",
+    "type":"Armor",
+    "bases":["Padded","Leather","Studded Leather","Hide","Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"$b$, +3",
+    "type":"Armor",
+    "bases":["Padded","Leather","Studded Leather","Hide","Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "rarity":"Legendary",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"$b$ of $v$ Slaying",
+    "type":"Weapon",
+    "bases":["Arrow","Bolt"],
+    "rarity":"Very Rare",
+    "variants":["Aberration","Beast","Celestial","Construct","Dragon","Elemental","Fey","Fiend","Giant","Monstrosity","Ooze","Plant","Undead"],
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"Arrow-Catching Shield",
+    "type":"Armor",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Astral Shard",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 120"
+  },
+  {
+    "name":"Astromancy Archive",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 120"
+  },
+  {
+    "name":"Atlas of Endless Horizons",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 120"
+  },
+  {
+    "name":"Bag of Beans",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"Bag of Devouring",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"Bag of Holding",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"$v$ Bag of Tricks",
+    "type":"Wondrous Item",
+    "variants":["Gray","Rust","Tan"],
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Barrier Tattoo (Uncommon)",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Barrier Tattoo (Rare)",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Barrier Tattoo (Very Rare)",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Bead of Force",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"Bead of Nourishment",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Bead of Refreshment",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Belashrra's Beholder Crown",
+    "type":"Wondrous Item",
+    "rarity":"Legendary",
+    "attunement":true,
+    "major":true,
+    "source":"ERLW, pg. 276"
+  },
+  {
+    "name":"Bell Branch",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Belt of Dwarvenkind",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Belt of Hill Giant Strength",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Belt of $v$ Giant Strength",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "variants":["Frost","Stone","Fire"],
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Belt of $v$ Giant Strength",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "variants":["Cloud","Storm"],
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Berserker $b$",
+    "type":"Weapon",
+    "rarity":"Rare",
+    "bases":["Battleaxe","Greataxe","Handaxe"],
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Blackrazor",
+    "type":"Weapon",
+    "rarity":"Legendary",
+    "attunement":true,
+    "major":true,
+    "source":"DMG, pg. 216"
+  },
+  {
+    "name":"Blood Fury Tattoo",
+    "type":"Wondrous Item",
+    "rarity":"Legendary",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Bloodwell Vial, +1",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Bloodwell Vial, +2",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Bloodwell Vial, +3",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Boots of Elvenkind",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Boots of False Tracks",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Boots of Levitation",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Boots of Speed",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Boots of Striding and Springing",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Boots of the Winterlands",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Bowl of Commanding Water Elementals",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Bracers of Archery",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Bracers of Defense",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Brazier of Commanding Fire Elementals",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Brooch of Shielding",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Broom of Flying",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Candle of Invocation ($v$)",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "variants":["Chaotic Evil","Chaotic Neutral","Chaotic Good","Neutral Evil","Neutral","Neutral Good","Lawful Evil","Lawful Neutral","Lawful Good"],
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Candle of the Deep",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Cap of Water Breathing",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":false,
+    "source":"DMG, pg. 157"
+  },
+  {
+    "name":"Cape of the Mountebank",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Carpet of Flying ($v$)",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "variants":["3 ft. x 5 ft.","4 ft. x 6 ft.","5 ft. x 7 ft.","6 ft. x 9 ft."],
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Cast-Off Armor, $b$",
+    "type":"Armor",
+    "rarity":"Common",
+    "bases":["Padded","Leather","Studded Leather","Hide","Chain Shirt","Scale Mail","Breastplate","Half Plate","Ring Mail","Chain Mail","Splint","Plate"],
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Cauldron of Rebirth",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 122"
+  },
+  {
+    "name":"Censer of Controlling Air Elementals",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Charlatan's Die",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Chime of Opening",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":false,
+    "major":false,
+    "source":"BR"
+  },
+  {
+    "name":"Circlet of Blasting",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Clensing Stone",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"ERLW, pg. 276"
+  },
+  {
+    "name":"Cloak of Arachnida",
+    "type":"Wondrous Item",
+    "rarity":"Very Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Cloak of Billowing",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Cloak of Displacement",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Cloak of Elvenkind",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Cloak of Invisibility",
+    "type":"Wondrous Item",
+    "rarity":"Legendary",
+    "attunement":true,
+    "major":true,
+    "source":"DMG, pg. 158"
+  },
+  {
+    "name":"Cloak of Many Fashions",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 136"
+  },
+  {
+    "name":"Cloak of Protection",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Cloak of the Bat",
+    "type":"Wondrous Item",
+    "rarity":"Rare",
+    "attunement":true,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Cloak of the Manta Ray",
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":false,
+    "major":true,
+    "source":"BR"
+  },
+  {
+    "name":"Clockwork Amulet",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 137"
+  },
+  {
+    "name":"Clothes of Mending",
+    "type":"Wondrous Item",
+    "rarity":"Common",
+    "attunement":false,
+    "major":false,
+    "source":"XGTE, pg. 137"
+  },
+  {
+    "name":"Coiling Grasp Tattoo"
+    "type":"Wondrous Item",
+    "rarity":"Uncommon",
+    "attunement":true,
+    "major":true,
+    "source":"TCoE, pg. 123"
+  }
+]
