@@ -4,7 +4,7 @@ const Discord = require('discord.js'); // Image embed
 
 module.exports = {
   name: 'quests', // The name of the command
-  aliases: ['progress'],
+  aliases: ['progress','words','totalwords'],
   description: 'Lists the quests of a user along with their writing/roleplay stats.', // The description of the command (for help text)
   args: false, // Specified that this command doesn't need any data other than the command
   perms: false,
