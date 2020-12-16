@@ -59,6 +59,8 @@ module.exports = {
       const eventFunctions = fs.readdirSync('./events',{ withFileTypes: true }).filter((f)=>f.name.endsWith('.js'));
       eventFunctions.forEach((eventF) => {
         delete require.cache[require.resolve('./../../events/'+eventF.name)];
+        const event = require(eventF);
+        client.events.set(event.name,event);
       });
 
       console.log('Events done, now reloading config.');

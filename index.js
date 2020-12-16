@@ -18,16 +18,6 @@ const mongoose = require("mongoose"); //database library
 const connectDB = require("./database/connectDB.js"); // Database connection
 const database = config.dbName; // Database name
 
-const onDelete = require('./events/on-delete.js');
-const onEdit = require('./events/on-edit.js');
-const onMessage = require('./events/on-message.js');
-const onReactionAdd = require('./events/on-reaction-add.js');
-const onReactionRemove = require('./events/on-reaction-remove.js');
-const onReactionTake = require('./events/on-reaction-take.js'); // mod/bot removals of reactions
-const onReactionClear = require('./events/on-reaction-clear.js'); // clearing of message reactions
-
-
-
 const client = new Discord.Client({partials: ['MESSAGE']}); // Initiates the client
 
 client.commands = new Discord.Collection(); // Creates an empty list in the client object to store all commands
@@ -56,6 +46,15 @@ for (const file of commandFiles) {
 
 client.cooldowns = new Discord.Collection(); // Creates an empty list for storing timeouts so people can't spam with commands
 
+// load the core events into client
+client.events = new Discord.Collection();
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+    client.events.set(event.name, event);
+}
+
+
 // Starts the bot and makes it begin listening for commands.
 client.on('ready', async function() {
     client.user.setPresence({ activity: { type: 'PLAYING', name: 'with my Skull Dice' }, status: 'online' });
@@ -64,35 +63,35 @@ client.on('ready', async function() {
 
 client.on('message', async message => {
     if (message.author.bot) {return} // don't respond to bots
-    onMessage(message);
+    client.events.get("onMessage").event(message);
 });
 
 client.on('messageDelete', async message => {
     if (message.author && message.author.bot) {return} // don't respond to bots
-    onDelete(message);
+    client.events.get("onDelete").event(message);
 });
 
 client.on('messageUpdate', async (oldMessage, newMessage) => {
     if (newMessage.author && newMessage.author.bot) {return} // don't respond to bots
-    onEdit(oldMessage, newMessage);
+    client.events.get("onEdit").event(oldMessage, newMessage);
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
     if (user.bot) {return}
-    onReactionAdd(reaction, user);
+    client.events.get("onReactionAdd").event(reaction, user);
 });
 
 client.on('messageReactionRemove', async (reaction, user) => {
     if (user.bot) {return}
-    onReactionRemove(reaction, user);
+    client.events.get("onReactionRemove").event(reaction, user);
 });
 
 client.on('messageReactionRemoveEmoji', async (reaction) => {
-    onReactionTake(reaction);
+    client.events.get("onReactionTake").event(reaction);
 });
 
 client.on('messageReactionRemoveAll', async (message) => {
-    onReactionClear(message);
+    client.events.get("onReactionClear").event(message);
 });
 
 connectDB("mongodb://localhost:27017/"+database);
