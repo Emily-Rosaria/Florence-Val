@@ -38,7 +38,7 @@ module.exports = {
       });
     }
     const isQuest = userData.quests && userData.quests.length > 0 ? "Below is some information about their current quest progress." : "They are not currently participating in any quests.";
-    const array = Object.entries(userData);
+    const array = Object.entries(questData);
     const embed = new Discord.MessageEmbed()
     .setAuthor(user.username, user.displayAvatarURL())
     .setTitle(`Quest Progress of ${user.username}!`)
