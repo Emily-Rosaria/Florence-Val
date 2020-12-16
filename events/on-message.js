@@ -23,7 +23,7 @@ module.exports = async function (message) {
       onQuest(message);
     } else if (config.channels.tavern.includes(message.channel.id)) {
       onTavern(message);
-    } else if (message.channel.type == "dm" && message.content.toLowerCase() == "ping") {
+    } else if (message.channel.type == "dm" && (message.content.toLowerCase() == "ping" || message.content.toLowerCase() == "ping!")) {
       message.reply("pong!");
     }
     return;

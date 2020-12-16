@@ -13,7 +13,7 @@ module.exports = async function (message) {
   if (splitMSG.length % 2 == 0) { // even number of ``` means odd number of items after splits
     cleanMSG = cleanMSG + "\n" + splitMSG.slice(-1)[0]; // add last item as that won't be put in code
   }
-  cleanMSG = cleanMSG.replace(/[*_~|`]+/,''); // remove formatting characters
+  cleanMSG = cleanMSG.replace(/[*_~|`]+/,'').trim(); // remove formatting characters
   cleanMSG = cleanMSG.replace(/ {2,}/,' ').replace(/\n{2,}/,'\n'); // remove excessive line breaks and double spaces
   cleanMSG = cleanMSG.replace(/\p{M}+/,''); // remove zalgo text ("mark characters")
   const words = cleanMSG.split(/\s+/).length;
@@ -29,11 +29,10 @@ module.exports = async function (message) {
   });
 
   // update user word/char counts
-  const oldUserData = await Users.findOneAndUpdate({_id: message.author.id, "quests._id": message.channel.id},
-  {
+  const oldUserData = await Users.findOneAndUpdate({_id: message.author.id},{
     "$inc": {
       "totalChars": chars,
       "totalWords": words
     }
-  },{upsert : true}).exec();
+  }).exec();
 }

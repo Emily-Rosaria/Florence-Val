@@ -44,7 +44,8 @@ var QuestSchema = new Schema({
   _id: {type: String, required: true}, // ID of quest channel
   charCount: {type: Number, default: 0}, // numbers are the clean character count, which can later be converted to xp
   wordCount: {type: Number, default: 0}, // numbers are the word count (has no mechanical use, is just for bragging rights)
-  startTime: {type: Number, default: (new Date()).getTime()} // start time of the quest (or first post in the channel) in unix ms
+  startTime: {type: Number, default: (new Date()).getTime()}, // start time of the quest (or first post in the channel) in unix ms
+  firstMSG: {type: Number, default: 0} // ID of the first message posted for the quest
 });
 
 var StoredStatsSchema = new Schema({
