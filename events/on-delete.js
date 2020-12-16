@@ -37,11 +37,9 @@ module.exports = {
             "totalChars": charChange,
             "totalWords": wordChange
           },
-          {
-            "$pull": {
-              "quests": {
-                "_id": {"$eq": oldMessageData.channel}
-              }
+          "$pull": {
+            "quests": {
+              "_id": {"$eq": oldMessageData.channel}
             }
           }
         }).exec();
