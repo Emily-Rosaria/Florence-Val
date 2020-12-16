@@ -39,7 +39,7 @@ module.exports = {
     }).exec();
 
     if (oldUserData) {
-      if (oldUserData.quests && isArray(oldUserData.quests)) {
+      if (oldUserData.quests && Array.isArray(oldUserData.quests)) {
         const oldQuestData = oldUserData.quests.find(q=>q._id==message.channel.id);
         if (oldQuestData) {
           await Users.updateOne({

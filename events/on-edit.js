@@ -11,7 +11,7 @@ module.exports = {
       return;
     }
 
-    const oldData = await Messages.findById(message.id).exec();
+    const oldData = await Messages.findById(newMessage.id).exec();
     const cID = oldData ? oldData.channel : (newMessage.channel ? newMessage.channel.id : false);
     const uID = oldData ? oldData.author : (newMessage.author ? newMessage.author.id : false);
     const timestamp = oldData ? oldData.timestamp : (newMessage.createdAt ? newMessage.createdAt.getTime() : (newMessage.editedAt ? newMessage.editedAt.getTime() : (new Date()).getTime()));
@@ -46,7 +46,7 @@ module.exports = {
 
     if (quest) {
        const questData = userData.quests.find(q=>q._id == cID);
-       if (!questData || (timestamp && timestamp < questData.startTime) || Number(message.id) < questData.firstMSG) {
+       if (!questData || (timestamp && timestamp < questData.startTime) || Number(newMessage.id) < questData.firstMSG) {
          return; // don't make changes for old message edits (or edits for posts not corresponding to a current quest)
        }
     }
@@ -67,7 +67,7 @@ module.exports = {
     const words = cleanMSG.split(/\s+/).length;
     const chars = cleanMSG.length;
 
-    const oldMessageData = await Messages.findByIdAndUpdate(message.id,{
+    const oldMessageData = await Messages.findByIdAndUpdate(newMessage.id,{
       "$set": {
         author: uID,
         channel: cID,
@@ -78,12 +78,12 @@ module.exports = {
       }
     },{upsert: true, new: false}).exec(); // create message data if it doesn't exist (updates if it does), then return old message data (if it exists)
 
-    const wordChange = oldMessageData && oldMessageData.wordCount ? oldMessageData.wordCount - words : words;
-    const charChange = oldMessageData && oldMessageData.charCount ? oldMessageData.charCount - chars : chars;
+    const wordChange = oldMessageData && oldMessageData.wordCount ? words - oldMessageData.wordCount : words;
+    const charChange = oldMessageData && oldMessageData.charCount ? chars - oldMessageData.charCount : chars;
 
     if (wordChange != 0 || charChange != 0) {
       if (quest) {
-        await Users.updateOne({_id: message.author.id, "quests._id": message.channel.id},{
+        await Users.updateOne({_id: uID, "quests._id": cID},{
           "$inc": {
             "quests.$.charCount": charChange,
             "quests.$.wordCount": wordChange,
@@ -92,7 +92,7 @@ module.exports = {
           }
         }).exec();
       } else {
-        await Users.updateOne({_id: message.author.id},{
+        await Users.updateOne({_id: uID},{
           "$inc": {
             "totalChars": charChange,
             "totalWords": wordChange
