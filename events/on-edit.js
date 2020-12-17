@@ -64,8 +64,8 @@ module.exports = {
     cleanMSG = cleanMSG.replace(/[*_~|`]+/,'').trim(); // remove formatting characters
     cleanMSG = cleanMSG.replace(/ {2,}/,' ').replace(/\n{2,}/,'\n'); // remove excessive line breaks and double spaces
     cleanMSG = cleanMSG.replace(/\p{M}+/,''); // remove zalgo text ("mark characters")
-    const words = cleanMSG.split(/\s+/).length;
     const chars = cleanMSG.length;
+    const words = chars == 0 ? 0 : cleanMSG.split(/\s+/).length;
 
     const oldMessageData = await Messages.findByIdAndUpdate(newMessage.id,{
       "$set": {
