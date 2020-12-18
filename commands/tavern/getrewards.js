@@ -42,7 +42,7 @@ module.exports = {
     let bonus = 1;
     let tags = 0;
 
-    if args.length > 2 {
+    if (args.length > 2) {
       for (const arg of [].concat(args).reverse().slice(0,2)) {
         if (arg.startsWith('-')) {
           const tag = arg.toLowerCase.slice(1);
@@ -106,9 +106,12 @@ module.exports = {
     if (!char) {
       return message.reply(`No character with the name or ID ${name} could be found in this user's character list. User \`$chars\` to view some brief data about your characters. If you added arguments to represent bonuses, make sure they were valid (e.g. -hard -groupM).`);
     }
-    const name = char.name;
-    const id = char._id;
+    name = char.name;
+    id = char._id;
     const oldXP = char.exp || 0;
+    const oldGold = char.gold || 0;
+    const oldTokens = char.tokens || 0;
+    const oldDowntime = char.downtime || 0;
 
     if (!char.approved) {
       return message.reply(`The character ${name} with id ${id} is not yet approved. Please make sure to submit them for approval first before trying to write quests with them of earn xp with them.`);
@@ -122,6 +125,7 @@ module.exports = {
     const goldGain = (Math.round((1+difficulty)*Math.min(questDays,questData.charCount/config.daySize)*config.questGold[level-1] + Number.EPSILON) * 100) / 100;
     let downtime = 1.2*questData.charCount > config.daySize ? Math.max(Math.min(questDays,0.5*questData.charCount/config.daySize),1) : questData.charCount/config.daySize;
     downtime = Math.floor(10*(downtime + Number.EPSILON))/10;
+    const newDowntime = Math.min(config.maxDowntime,downtime+oldDowntime);
     let tokens = Math.floor(Math.min(questDays,0.5*questData.charCount/config.daySize));
     tokens = tokens < 1 ? Math.floor(questData.charCount/config.daySize) : tokens;
     const embed = new Discord.MessageEmbed()
@@ -129,12 +133,16 @@ module.exports = {
     .setTitle(`Quest Completed by ${name}!`)
     .setColor('#ffb347')
     .setDescription(`<@${member.user.id}>'s character ${name} (ID: ${id}) just completed a quest and earned some rewards!`)
+    .addField("Experience",`Old XP: **\`${oldXP}\`**\nNew XP: **\`${oldXP+xpGain}\`**`,true)
+    .addField("Gold",`Old Gold: **\`${oldGold}\`**\nNew Gold: **\`${oldGold+goldGain}\`**`,true)
+    .addField("Tokens",`Old Tokens: **\`${oldTokens}\`**\nNew Tokens: **\`${oldTokens+tokens}\`**`,true)
+    .addField("Downtime Points",`They have **\`${newDowntime}\`** / **\`${config.maxDowntime}\`** Downtime Points to spend.`,false)
     .setFooter(`${message.author.tag} - ${message.author.id}`, message.author.displayAvatarURL())
     .setTimestamp()
     message.channel.send({embed: embed});
 
-    const modlog = message.guild.channels.cache.get(config.channels.modlog);
+    //const modlog = message.guild.channels.cache.get(config.channels.modlog);
 
-    modlog.send({embed: embed});
+    //modlog.send({embed: embed});
   },
 };
