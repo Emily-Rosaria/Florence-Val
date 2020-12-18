@@ -7,9 +7,11 @@ module.exports = {
   name: "onEdit",
   async event(oldMessage, newMessage) {
 
-    if (newMessage.partial && (!newMessage.content || !newMessage.client)) {
+    if (newMessage.partial && !newMessage.client) {
       return;
     }
+
+    let content = newMessage.content;
 
     const oldData = await Messages.findById(newMessage.id).exec();
     const cID = oldData ? oldData.channel : (newMessage.channel ? newMessage.channel.id : false);
@@ -17,6 +19,10 @@ module.exports = {
     const timestamp = oldData ? oldData.timestamp : (newMessage.createdAt ? newMessage.createdAt.getTime() : (newMessage.editedAt ? newMessage.editedAt.getTime() : (new Date()).getTime()));
     if (uID == false || cID == false) {
       return;
+    }
+
+    if (!content && newMessage.partial) {
+      content = await newMessage.fetch().then((m)=>m.content);
     }
 
     let quest = false;
@@ -31,7 +37,7 @@ module.exports = {
     const otherBots = ["!","?","r!","r?","/r","s?","-"];
 
     // Find if message now begins with a valid command prefix
-    const prefix = config.prefix.concat(botPing).some(p => newMessage.content.toLowerCase().startsWith(p));
+    const prefix = config.prefix.concat(botPing).concat(otherBots).some(p => content.toLowerCase().startsWith(p));
 
     // If prefixes, return (bot doesn't care about command messages)
     if (prefix) {
@@ -51,7 +57,7 @@ module.exports = {
        }
     }
 
-    const splitMSG = newMessage.content.split('```'); // split around ``` to find content between pairs of them
+    const splitMSG = content.split('```'); // split around ``` to find content between pairs of them
     let cleanMSG = splitMSG[0].trim();
     if (splitMSG.length > 2) {
       for (var i = 1; 2*i>splitMSG.length; i++) {

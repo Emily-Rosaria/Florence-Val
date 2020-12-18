@@ -4,6 +4,10 @@
   "statMax":85,
   "dbName": "dnd",
   "cumulativeExp": [0,300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000],
+  "questsNeeded": [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9,8.5],
+  "questSize": 4000,
+  "daySize":2000,
+  "questGold": [30,60,120,200,280,360,460,560,680,700,840,980,1140,1300,1500,1750,2000,2300,2650,3000],
   "startingLevel": 3,
   "guild": "785026335953125386",
   "channels": {
@@ -39,5 +43,22 @@
   ],
   "gifs":{
     "blast":"https://media1.tenor.com/images/8c1f5a467a7bc94cc93f74ac20f366bc/tenor.gif"
+  },
+  "bonuses":{
+    "difficulty":{
+      "easy":0,
+      "medium":0.10,
+      "hard":0.25,
+      "deadly":0.40
+    },
+    "gm":{
+      "min":0.05,
+      "max":0.5
+    },
+    "group":{
+      "groupSmall":0.10,
+      "groupMedium":0.25,
+      "groupLarge":0.40
+    }
   }
 }
