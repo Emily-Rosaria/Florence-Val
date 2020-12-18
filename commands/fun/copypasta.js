@@ -13,8 +13,8 @@ module.exports = {
   async execute(message, args) {
     const timeframe = [args.join(' ').match(/(day|week|month|year|all)/g) || 'week'][0];
     const numMatch = Number([args.join(' ').match(/\d+/) || 1][0]);
-    let postCount = (numMatch > 5) ? 5 : numMatch;
-    if (message.author.id == dev) {postCount = numMatch};
+    let postCount = Math.min(numMatch,5);
+    if (message.author.id == config.dev) {postCount = Math.min(numMatch,100)};
     const nsfw = (message.channel.type == 'text') ? (args.includes('nsfw') && [config.dev,config.luc].includes(message.author.id)) : ((message.channel.type == 'dm') && args.includes('nsfw'));
     const rating = nsfw ? 'NSFW posts are enabled.' : 'All posts should be (relatively) SFW as far as copypastas go.';
     const plural = (postCount==1) ? 'post' : 'posts';

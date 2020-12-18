@@ -82,7 +82,13 @@ UserSchema.method('getRanks', function() {
   }
   const levels = [];
   for (const char of this.characters) {
-    levels.push(char.level);
+    // don't give ranks for characters without any xp gained
+    if (char.xp > config.cumulativeExp[config.startingLevel-1]) {
+      levels.push(char.level);
+    }
+  }
+  if (levels.length == 0) {
+    return null;
   }
   const ranks = levels.sort((a,b)=>a-b).reduce((acc,cur)=>{
     cRank = config.ranks.find(r=>cur<r.level);
@@ -109,7 +115,7 @@ UserSchema.statics.updateCache = async function (member) {
     }
   }
   const slots = baseSlots+bonus;
-  await this.findByIdAndUpdate(member.user.id,{
+  await this.updateOne({_id: member.user.id},{
     "$set" : {
       cachedSlots: slots
     }
