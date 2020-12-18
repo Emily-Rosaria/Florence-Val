@@ -10,7 +10,7 @@ module.exports = {
   perms: false,
   allowDM: false,
   cooldown: 3,
-  usage: '<user>', // Help text to explain how to use the command (if it had any arguments)
+  usage: '[user]', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
     let user = message.author;
     if (args && args.length > 0) {

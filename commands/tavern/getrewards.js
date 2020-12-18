@@ -12,7 +12,7 @@ module.exports = {
   aliases: ['getrewards','collectreward','collectrewards','completequest','finishquest','claimreward','claimrewards','claimxp'],
   allowDM: false,
   cooldown: 5,
-  usage: '<channel> <character-name/ID> <bonuses>', // Help text to explain how to use the command (if it had any arguments)
+  usage: '<channel> <character-name/ID> [bonuses]', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
     const arg = args[0].match(/\d+/);
     if (!arg) {

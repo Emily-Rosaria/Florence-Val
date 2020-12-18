@@ -8,7 +8,7 @@ module.exports = {
     description: 'List all available commands, or info about a specific command.',
     aliases: ['commands','info'],
     perms: false, //no user-based restrictions
-    usage: '<command name>',
+    usage: '[command name]',
     cooldown: 5,
     allowDM: true,
     async execute(message, args) {

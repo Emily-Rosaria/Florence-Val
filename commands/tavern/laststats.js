@@ -9,7 +9,7 @@ module.exports = {
   args: false, // Specified that this command doesn't need any data other than the command
   perms: false,
   allowDM: true,
-  usage: '', // Help text to explain how to use the command (if it had any arguments)
+  usage: '[user]', // Help text to explain how to use the command (if it had any arguments)
   async execute(message, args) {
     const user = !!args[0] ? message.client.users.cache.get(args[0].match(/\d+/)[0]) || message.author : message.author;
     const userData = await Users.findById(user.id).exec();
