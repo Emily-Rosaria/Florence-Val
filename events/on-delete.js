@@ -20,17 +20,15 @@ module.exports = {
       return; // don't do anything if there's no user data or if the message was for a past quest that's no longer in progress
     }
 
-    if (quest) {
-       const questData = userData.quests.find(q=>q._id == oldMessageData.channel);
-       if (!questData || oldMessageData.timestamp < questData.startTime || Number(message.id) < questData.firstMSG) {
-         return; // don't make changes for old message deletions (or for deleted posts not corresponding to a current quest)
-       }
-    }
-
     const wordChange = -oldMessageData.wordCount;
     const charChange = -oldMessageData.charCount;
 
     if (quest) {
+      const questData = userData.quests.find(q=>q._id == oldMessageData.channel);
+      if (!questData || oldMessageData.timestamp < questData.startTime || Number(message.id) < questData.firstMSG) {
+        return; // don't make changes for old message deletions (or for deleted posts not corresponding to a current quest)
+      }
+
       if (questData.wordCount + wordChange <= 0 || questData.charCount + charChange <= 0) {
         await Users.updateOne({_id: oldMessageData.author},{
           "$inc": {

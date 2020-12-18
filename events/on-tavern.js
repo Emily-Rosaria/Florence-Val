@@ -6,17 +6,9 @@ module.exports = {
   name: "onTavern",
   async event(message) {
     const splitMSG = message.content.split('```');
-    let cleanMSG = splitMSG[0].trim();
-    if (splitMSG.length > 2) {
-      for (var i = 1; 2*i>splitMSG.length; i++) {
-        cleanMSG = cleanMSG + "\n" + splitMSG[2*i].trim();
-      }
-    }
-    if (splitMSG.length % 2 == 0) { // even number of ``` means odd number of items after splits
-      cleanMSG = cleanMSG + "\n" + splitMSG.slice(-1)[0]; // add last item as that won't be put in code
-    }
+    let cleanMSG = splitMSG.filter((e,i)=>i % 2 == 0 || (i+1 < splitMSG.length && splitMSG.length % 2 == 0)).join(' ');
     cleanMSG = cleanMSG.replace(/[*_~|`]+/,'').trim(); // remove formatting characters
-    cleanMSG = cleanMSG.replace(/ {2,}/,' ').replace(/\n{2,}/,'\n'); // remove excessive line breaks and double spaces
+    cleanMSG = cleanMSG.replace(/\s{2,}/,' '); // remove excessive line breaks and double spaces
     cleanMSG = cleanMSG.replace(/\p{M}+/,''); // remove zalgo text ("mark characters")
     const chars = cleanMSG.length;
     const words = chars == 0 ? 0 : cleanMSG.split(/\s+/).length;
