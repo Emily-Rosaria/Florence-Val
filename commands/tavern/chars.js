@@ -28,7 +28,7 @@ module.exports = {
 
     const array = userData.characters.map(c=>{
       const name = c.name || 'This character';
-      const approved = c.approved ? `${name} is approved, and has ${c.gold || '0'} gp and ${c.exp || '0'} xp. They also have ${c.tokens || '0'} tokens.` : `${name} is not yet approved.`;
+      const approved = c.approved ? `${name} is approved, and has ${c.gold || '0'} gp and ${c.exp || '0'} xp. They also have ${c.tokens || '0'} tokens and ${c.downtime || '0'} downtime points.` : `${name} is not yet approved.`;
       return [c.name,approved+`\nThis character's id is \`${c._id}\`.`];
     });
 
