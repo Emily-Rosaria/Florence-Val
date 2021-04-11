@@ -15,26 +15,16 @@ module.exports = {
     async execute(message, args) {
 
       // Get dog from the api.
-      const url_base = "https://random.dog/";
-      const extensions = [".jpg",".gif",".jpeg",".png"];
-      const doggos = await fetch('https://random.dog/doggos').then(response => response.json()).catch((err)=>["",""]);
-      let index = Math.floor(Math.random() * doggos.length);
-      var url = doggos[index];
-      let breaking = 0;
-      while (!extensions.some(ext => url.toLowerCase().endsWith(ext))) {
-        index = (index + 1) % doggos.length;
-        url = doggos[index];
-        breaking = breaking + 1;
-        if (breaking > 10) {
-          url = "";
-          break;
-        }
+      const fetched = await fetch('https://dog.ceo/api/breeds/image/random').then(response => response.json());
+      var url = false;
+      if (fetched.status && fetched.status == "success") {
+        url = fetched.message;
       }
-      if (!url || url == "") {
-        message.reply("Sorry, I'm having trouble accessing the API of woofers at the moment. Try again in a bit.");
+      if (url) {
+        const embed = new Discord.MessageEmbed().setImage(url).setTitle('Woof').setFooter('Source: dog.ceo/api').setTimestamp();
+        message.reply(embed); // Replies to the user with a random dog
+      } else {
+        message.reply("I'm having trouble fetching images from the `dog.ceo` API right now. Try again in a moment.");
       }
-      url = url_base + url;
-      const embed = new Discord.MessageEmbed().setImage(url).setTitle('Woof').setFooter('Source: random.dog').setTimestamp();
-      message.reply(embed); // Replies to the user with a random dog
     },
 };
